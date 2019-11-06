@@ -6,8 +6,10 @@ namespace ControlCalidadModel{
 	private:
 		int codigo;
 		String^ profesion;
-		String^ nombre;
+		String^ nombres;
+		String^ apellidos;
 	public:
-		Usuario(int codigo, String^ profesion, String^ nombre);
+		Usuario();
+		Usuario(int codigo, String^ profesion, String^ nombres, String^ apellidos);
 	};
 }
