@@ -3,6 +3,7 @@
 
 namespace ControlCalidadModel{
 	using namespace System;
+	[Serializable]
 	public ref class SistemaFajaDistribuidora{
 	private:
 		int codigo;

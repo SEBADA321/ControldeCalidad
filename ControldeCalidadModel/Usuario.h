@@ -2,6 +2,7 @@
 
 namespace ControlCalidadModel{
 	using namespace System;
+	[Serializable]
 	public ref class Usuario{
 	private:
 		int codigo;

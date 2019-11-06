@@ -2,6 +2,7 @@
 
 namespace ControlCalidadModel{
 	using namespace System;
+	[Serializable]
 	public ref class SensorDistancia{
 	public:
 		int RangoDistancia;

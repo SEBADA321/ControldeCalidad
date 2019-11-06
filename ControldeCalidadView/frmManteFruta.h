@@ -217,7 +217,7 @@ namespace ControldeCalidadView{
 			array<String^>^ fila = gcnew array<String^>(5);
 			fila[0] = Convert::ToString(objFruta->codigo);
 			fila[1] = objFruta->nombre;
-			fila[2] = objFruta->tamaño;
+			fila[2] = Convert::ToString(objFruta->tamaño);
 			fila[3] = objFruta->color;
 			fila[4] = objFruta->estado;
 			this->dataGridView1->Rows->Add(fila);
@@ -231,7 +231,7 @@ namespace ControldeCalidadView{
 			array<String^>^ fila = gcnew array<String^>(5);
 			fila[0] = Convert::ToString(objFruta->codigo);
 			fila[1] = objFruta->nombre;
-			fila[2] = objFruta->tamaño;
+			fila[2] = Convert::ToString(objFruta->tamaño);
 			fila[3] = objFruta->color;
 			fila[4] = objFruta->estado;
 			this->dataGridView1->Rows->Add(fila);

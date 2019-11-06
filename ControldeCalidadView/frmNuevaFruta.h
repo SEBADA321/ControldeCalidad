@@ -209,7 +209,7 @@ namespace ControldeCalidadView{
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		int codigo = Convert::ToInt32(this->textBox1->Text);
 		String^ nombre = this->textBox2->Text;
-		String^ tamaño = this->textBox3->Text;
+		int tamaño = Convert::ToInt32(this->textBox3->Text);
 		String^ color = this->textBox4->Text;
 		String^ estado;
 		if (this->comboBox1->Text == "Apto"){

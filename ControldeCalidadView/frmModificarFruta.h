@@ -214,7 +214,7 @@ namespace ControldeCalidadView{
 		Fruta^ objFruta = this->objGestorFruta->ObtenerFrutaxCodigo(this->idModificar);
 		this->textBox1->Text = Convert::ToString(objFruta->codigo);
 		this->textBox2->Text = objFruta->nombre;
-		this->textBox3->Text = objFruta->tamaño;
+		this->textBox3->Text = Convert::ToString(objFruta->tamaño);
 		this->textBox4->Text = objFruta->color;
 		if (objFruta->estado == "Apto")
 			this->comboBox1->Text = "Apto";
@@ -225,7 +225,7 @@ namespace ControldeCalidadView{
 		this->objGestorFruta->EliminarFrutaxCodigo(this->idModificar);
 		int codigo = Convert::ToInt32(this->textBox1->Text);
 		String^ nombre = this->textBox2->Text;
-		String^ tamaño = this->textBox3->Text;
+		int tamaño = Convert::ToInt32(this->textBox3->Text);
 		String^ color = this->textBox4->Text;
 		String^ estado;
 		if (this->comboBox1->Text == "Apto"){

@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace ControldeCalidadController {
 	using namespace System::Collections::Generic;
 	using namespace System;
@@ -22,6 +20,8 @@ namespace ControldeCalidadController {
 		void EscribirFrutaEnArchivo();
 		Fruta^ ObtenerFrutaxCodigo(int id);
 		List<Fruta^>^ BuscarFrutaxNombre(String^ nombre);
+		void Serializar();
+		void Deserializar();
 	};
 
 }

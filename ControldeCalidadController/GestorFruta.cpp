@@ -1,9 +1,11 @@
 #include "GestorFruta.h"
 
 using namespace ControldeCalidadController;
+using namespace ControlCalidadModel;
 using namespace System::Collections::Generic;
 using namespace System::IO; //Aquí esta la clase FILE que sirve para archivos de texto.
 using namespace System;
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 GestorFruta::GestorFruta(){
 	this->ListaFruta = gcnew List<Fruta^>();
@@ -27,7 +29,7 @@ void GestorFruta::LeerFrutaDesdeArchivo(){
 		array<String^>^ palabras = lineaFruta->Split(separadores->ToCharArray());
 		int codigo = Convert::ToInt32(palabras[0]);
 		String^ nombre = palabras[1];
-		String^ tamaño = palabras[2];
+		int tamaño = Convert::ToInt32(palabras[2]);
 		String^ color = palabras[3];
 		String^ estado = palabras[4];
 		Fruta^ objFruta = gcnew Fruta(codigo, nombre, tamaño, color, estado);
@@ -65,7 +67,6 @@ Fruta^ GestorFruta::ObtenerFrutaxCodigo(int id){
 	Fruta^ objFrutaEncontrada;
 	for (int i = 0; i < this->ListaFruta->Count; i++){
 		if (this->ListaFruta[i]->codigo == id){
-			/*La encontreeeeeeeeeeeeeeee*/
 			objFrutaEncontrada = this->ListaFruta[i];
 			break;
 		}
@@ -81,4 +82,18 @@ List<Fruta^>^ GestorFruta::BuscarFrutaxNombre(String^ nombre){
 		}
 	}
 	return listaFrutaEncontrados;
+}
+
+void GestorFruta::Serializar(){
+	Stream^ objStream = File::Open("Frutas.bin", FileMode::Create);
+	BinaryFormatter^ objFormateador = gcnew BinaryFormatter();
+	objFormateador->Serialize(objStream, this->ListaFruta);
+	objStream->Close();
+}
+
+void GestorFruta::Deserializar(){
+	Stream^ objStream = File::Open("Frutas.bin", FileMode::Open);
+	BinaryFormatter^ objFormateador = gcnew BinaryFormatter();
+	this->ListaFruta = dynamic_cast<List<Fruta^>^>(objFormateador->Deserialize(objStream));
+	objStream->Close();
 }

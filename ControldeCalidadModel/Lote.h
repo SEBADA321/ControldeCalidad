@@ -5,6 +5,7 @@
 namespace ControlCalidadModel{
 	using namespace System;
 	using namespace System::Collections::Generic;
+	[Serializable]
 	public ref class Lote{
 	private:
 		int codigoLote;
