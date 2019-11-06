@@ -1,10 +1,11 @@
 #pragma once
 
-using namespace System::Collections::Generic;
-using namespace ControlCalidadModel;
-using namespace System;
+
 
 namespace ControldeCalidadController {
+	using namespace System::Collections::Generic;
+	using namespace System;
+	using namespace ControlCalidadModel;
 
 	public ref class GestorFruta {
 	private:

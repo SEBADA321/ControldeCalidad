@@ -119,7 +119,7 @@
     <ClCompile Include="DispositivosConfigurables.cpp" />
     <ClCompile Include="Fruta.cpp" />
     <ClCompile Include="Motor.cpp" />
-    <ClCompile Include="Produccion.cpp" />
+    <ClCompile Include="Lote.cpp" />
     <ClCompile Include="SensorDistancia.cpp" />
     <ClCompile Include="SistemaFajaTransportadora.cpp" />
     <ClCompile Include="Usuario.cpp" />
@@ -128,7 +128,7 @@
     <ClInclude Include="DispositivosConfigurables.h" />
     <ClInclude Include="Fruta.h" />
     <ClInclude Include="Motor.h" />
-    <ClInclude Include="Produccion.h" />
+    <ClInclude Include="Lote.h" />
     <ClInclude Include="SensorDistancia.h" />
     <ClInclude Include="SistemaFajaDistribuidora.h" />
     <ClInclude Include="Usuario.h" />

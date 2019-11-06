@@ -1,4 +1,5 @@
 #pragma once
+#include "Usuario.h"
 
 namespace ControlCalidadModel{
 	using namespace System;
@@ -7,8 +8,9 @@ namespace ControlCalidadModel{
 		int codigo;
 		String^ EstadoSistema;
 		String^ Operacion;
-		String^ operario;
+		Usuario^ usuario;
 	public:
-		SistemaFajaDistribuidora(int codigo, String^ EstadoSistema, String^ Operacion, String^ Operario);
+		SistemaFajaDistribuidora(int codigo, String^ EstadoSistema, String^ Operacion, Usuario^ usuario);
+		SistemaFajaDistribuidora();
 	};
 }

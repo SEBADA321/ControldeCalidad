@@ -1,7 +1,6 @@
 #include "GestorFruta.h"
 
 using namespace ControldeCalidadController;
-using namespace ControlCalidadModel;
 using namespace System::Collections::Generic;
 using namespace System::IO; //Aquí esta la clase FILE que sirve para archivos de texto.
 using namespace System;

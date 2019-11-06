@@ -14,5 +14,3 @@ Usuario::Usuario(int codigo, String^ profesion, String^ nombres, String^ apellid
 	this->profesion = profesion;
 	this->apellidos = apellidos;
 }
-
-
