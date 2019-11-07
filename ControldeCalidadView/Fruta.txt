@@ -1,3 +1,0 @@
-1;mango;28;rojo;Apto
-3;Fresa;32;rojo;Apto
-12;Manzana;35;Verde;Apto

@@ -133,13 +133,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="frmIniciarProceso.cpp" />
     <ClCompile Include="frmManteFruta.cpp" />
     <ClCompile Include="frmModificarFruta.cpp" />
     <ClCompile Include="frmNuevaFruta.cpp" />
+    <ClCompile Include="Login.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="VentanaSerial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmIniciarProceso.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmManteFruta.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -152,11 +157,17 @@
     <ClInclude Include="frmPrincipal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Login.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="VentanaSerial.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmIniciarProceso.resx">
+      <DependentUpon>frmIniciarProceso.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmManteFruta.resx">
       <DependentUpon>frmManteFruta.h</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaSerial.resx">
       <DependentUpon>VentanaSerial.h</DependentUpon>

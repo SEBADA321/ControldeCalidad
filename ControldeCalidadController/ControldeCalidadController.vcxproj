@@ -118,10 +118,12 @@
   <ItemGroup>
     <ClCompile Include="GestorFruta.cpp" />
     <ClCompile Include="GestorLote.cpp" />
+    <ClCompile Include="GestorUsuario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GestorFruta.h" />
     <ClInclude Include="GestorLote.h" />
+    <ClInclude Include="GestorUsuario.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ControldeCalidadModel\ControldeCalidadModel.vcxproj">

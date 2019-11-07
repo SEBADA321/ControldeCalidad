@@ -9,8 +9,9 @@ namespace ControlCalidadModel{
 		String^ profesion;
 		String^ nombres;
 		String^ apellidos;
+		String^ password;
 	public:
 		Usuario();
-		Usuario(int codigo, String^ profesion, String^ nombres, String^ apellidos);
+		Usuario(int codigo, String^ profesion, String^ nombres, String^ apellidos, String^ password);
 	};
 }
