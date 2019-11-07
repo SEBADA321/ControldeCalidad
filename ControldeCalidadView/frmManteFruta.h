@@ -244,7 +244,7 @@ namespace ControldeCalidadView{
 		MostrarGrilla();
 	}
 	private: System::Void frmManteFruta_Load(System::Object^  sender, System::EventArgs^  e){
-		this->objGestorFruta->LeerFrutaDesdeArchivo();
+		this->objGestorFruta->Deserializar();
 		MostrarGrilla();
 	}
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e){
@@ -270,7 +270,7 @@ namespace ControldeCalidadView{
 		}
 	}
 	private: System::Void frmManteFruta_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
-		this->objGestorFruta->EscribirFrutaEnArchivo();
+		this->objGestorFruta->Serializar();
 	}
 	};
 }

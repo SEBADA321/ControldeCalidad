@@ -4,7 +4,7 @@ namespace ControlCalidadModel{
 	using namespace System;
 	[Serializable]
 	public ref class Usuario{
-	private:
+	public:
 		int codigo;
 		String^ profesion;
 		String^ nombres;

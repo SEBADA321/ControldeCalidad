@@ -2,14 +2,16 @@
 #include "Fruta.h"
 #include "Usuario.h"
 
+using namespace System;
+using namespace System::Collections::Generic;
+using namespace ControlCalidadModel;
+
 namespace ControlCalidadModel{
-	using namespace System;
-	using namespace System::Collections::Generic;
 	[Serializable]
 	public ref class Lote{
-	private:
-		int codigoLote;
-		String^ EstadoProducto;
+	public:
+		int codigo;
+		String^ EstadoLote;
 		int NroFrutasPodridas;
 		int NroFrutasNoPodridas;
 		int NroLote;

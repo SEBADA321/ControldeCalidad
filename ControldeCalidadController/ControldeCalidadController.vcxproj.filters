@@ -18,9 +18,15 @@
     <ClCompile Include="GestorFruta.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="GestorLote.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GestorFruta.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GestorLote.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
