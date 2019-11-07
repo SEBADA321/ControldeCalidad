@@ -9,8 +9,4 @@ SistemaFajaDistribuidora::SistemaFajaDistribuidora(int codigo, String^ EstadoSis
 }
 
 SistemaFajaDistribuidora::SistemaFajaDistribuidora(){
-	this->codigo = 0;
-	this->EstadoSistema = "";
-	this->Operacion = "";
-	this->usuario = gcnew Usuario();
 }

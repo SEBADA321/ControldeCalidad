@@ -6,4 +6,7 @@ Motor::Motor(int PotenciaPersonalizada, int frecuenciaPersonalizada){
 	this->PotenciaPersonalizada = 0;
 }
 
+ControlCalidadModel::Motor::Motor(){
+}
+
 

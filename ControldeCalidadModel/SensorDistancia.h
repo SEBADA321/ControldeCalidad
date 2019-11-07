@@ -8,5 +8,6 @@ namespace ControlCalidadModel{
 		int RangoDistancia;
 	public:
 		SensorDistancia(int RangoDistancia);
+		SensorDistancia();
 	};
 }

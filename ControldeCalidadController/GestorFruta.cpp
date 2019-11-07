@@ -2,9 +2,9 @@
 
 using namespace ControldeCalidadController;
 using namespace ControlCalidadModel;
-using namespace System::Collections::Generic;
-using namespace System::IO;
 using namespace System;
+using namespace System::IO;
+using namespace System::Collections::Generic;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 
 GestorFruta::GestorFruta(){

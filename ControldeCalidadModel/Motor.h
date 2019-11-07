@@ -10,5 +10,6 @@ namespace ControlCalidadModel {
 		int frecuenciaPersonalizada;
 	public:
 		Motor(int PotenciaPersonalizada,int frecuenciaPersonalizada);
+		Motor();
 	};
 }

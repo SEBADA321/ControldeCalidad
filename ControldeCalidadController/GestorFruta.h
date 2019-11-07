@@ -1,12 +1,12 @@
 #pragma once
 
-using namespace System::Collections::Generic;
 using namespace System;
 using namespace ControlCalidadModel;
+using namespace System::Collections::Generic;
 
-namespace ControldeCalidadController {
+namespace ControldeCalidadController{
 
-	public ref class GestorFruta {
+	public ref class GestorFruta{
 	public:
 		List<Fruta^>^ ListaFruta;
 
