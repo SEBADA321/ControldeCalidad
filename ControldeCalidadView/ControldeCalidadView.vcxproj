@@ -133,15 +133,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="frmAgregarFruta.cpp" />
     <ClCompile Include="frmIniciarProceso.cpp" />
     <ClCompile Include="frmManteFruta.cpp" />
     <ClCompile Include="frmModificarFruta.cpp" />
     <ClCompile Include="frmNuevaFruta.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MantenimientoUsuarios.cpp" />
+    <ClCompile Include="MantLote.cpp" />
+    <ClCompile Include="NuevoLote.cpp" />
+    <ClCompile Include="NuevoUsuario.cpp" />
     <ClCompile Include="VentanaSerial.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmAgregarFruta.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmIniciarProceso.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -158,6 +166,18 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Login.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MantenimientoUsuarios.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MantLote.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="NuevoLote.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="NuevoUsuario.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="VentanaSerial.h">
@@ -182,6 +202,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MantenimientoUsuarios.resx">
+      <DependentUpon>MantenimientoUsuarios.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MantLote.resx">
+      <DependentUpon>MantLote.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoLote.resx">
+      <DependentUpon>NuevoLote.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoUsuario.resx">
+      <DependentUpon>NuevoUsuario.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaSerial.resx">
       <DependentUpon>VentanaSerial.h</DependentUpon>

@@ -2,6 +2,8 @@
 #include "frmManteFruta.h"
 #include "VentanaSerial.h"
 #include "frmIniciarProceso.h"
+#include "MantenimientoUsuarios.h"
+#include "MantLote.h"
 
 namespace ControldeCalidadView{
 
@@ -22,10 +24,12 @@ namespace ControldeCalidadView{
 		frmPrincipal(void){
 			InitializeComponent();
 			this->objGestorLote = gcnew GestorLote();
+			this->iniciarToolStripMenuItem->Enabled = false;
 		}
 		frmPrincipal(Usuario^ usuario){
 			InitializeComponent();
 			this->objGestorLote = gcnew GestorLote();
+			this->usuario = usuario;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -83,12 +87,12 @@ namespace ControldeCalidadView{
 			this->serialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->configurarPuertoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cerrarPuertoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->serialPort = (gcnew System::IO::Ports::SerialPort(this->components));
-			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->lb_test = (gcnew System::Windows::Forms::Label());
 			this->procesosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->iniciarToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->verProcesosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->serialPort = (gcnew System::IO::Ports::SerialPort(this->components));
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->lb_test = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -100,7 +104,7 @@ namespace ControldeCalidadView{
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(674, 24);
+			this->menuStrip1->Size = System::Drawing::Size(819, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -123,10 +127,11 @@ namespace ControldeCalidadView{
 			// 
 			// usuarioToolStripMenuItem
 			// 
+			this->usuarioToolStripMenuItem->Enabled = false;
 			this->usuarioToolStripMenuItem->Name = L"usuarioToolStripMenuItem";
 			this->usuarioToolStripMenuItem->Size = System::Drawing::Size(204, 22);
 			this->usuarioToolStripMenuItem->Text = L"Usuario";
-			this->usuarioToolStripMenuItem->Enabled = false;
+			this->usuarioToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::usuarioToolStripMenuItem_Click);
 			// 
 			// sistemaFajaDistribuidoraToolStripMenuItem
 			// 
@@ -139,6 +144,7 @@ namespace ControldeCalidadView{
 			this->produccionToolStripMenuItem->Name = L"produccionToolStripMenuItem";
 			this->produccionToolStripMenuItem->Size = System::Drawing::Size(204, 22);
 			this->produccionToolStripMenuItem->Text = L"Lote";
+			this->produccionToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::produccionToolStripMenuItem_Click);
 			// 
 			// serialToolStripMenuItem
 			// 
@@ -153,7 +159,7 @@ namespace ControldeCalidadView{
 			// configurarPuertoToolStripMenuItem
 			// 
 			this->configurarPuertoToolStripMenuItem->Name = L"configurarPuertoToolStripMenuItem";
-			this->configurarPuertoToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->configurarPuertoToolStripMenuItem->Size = System::Drawing::Size(169, 22);
 			this->configurarPuertoToolStripMenuItem->Text = L"Configurar puerto";
 			this->configurarPuertoToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::configurarPuertoToolStripMenuItem_Click);
 			// 
@@ -161,22 +167,9 @@ namespace ControldeCalidadView{
 			// 
 			this->cerrarPuertoToolStripMenuItem->Enabled = false;
 			this->cerrarPuertoToolStripMenuItem->Name = L"cerrarPuertoToolStripMenuItem";
-			this->cerrarPuertoToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->cerrarPuertoToolStripMenuItem->Size = System::Drawing::Size(169, 22);
 			this->cerrarPuertoToolStripMenuItem->Text = L"Cerrar puerto";
 			this->cerrarPuertoToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::cerrarPuertoToolStripMenuItem_Click);
-			// 
-			// timer1
-			// 
-			this->timer1->Tick += gcnew System::EventHandler(this, &frmPrincipal::timer1_Tick);
-			// 
-			// lb_test
-			// 
-			this->lb_test->AutoSize = true;
-			this->lb_test->Location = System::Drawing::Point(517, 204);
-			this->lb_test->Name = L"lb_test";
-			this->lb_test->Size = System::Drawing::Size(35, 13);
-			this->lb_test->TabIndex = 2;
-			this->lb_test->Text = L"label1";
 			// 
 			// procesosToolStripMenuItem
 			// 
@@ -191,21 +184,34 @@ namespace ControldeCalidadView{
 			// iniciarToolStripMenuItem
 			// 
 			this->iniciarToolStripMenuItem->Name = L"iniciarToolStripMenuItem";
-			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->iniciarToolStripMenuItem->Text = L"Iniciar";
 			this->iniciarToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::iniciarToolStripMenuItem_Click);
 			// 
 			// verProcesosToolStripMenuItem
 			// 
 			this->verProcesosToolStripMenuItem->Name = L"verProcesosToolStripMenuItem";
-			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->verProcesosToolStripMenuItem->Text = L"Ver Procesos";
+			// 
+			// timer1
+			// 
+			this->timer1->Tick += gcnew System::EventHandler(this, &frmPrincipal::timer1_Tick);
+			// 
+			// lb_test
+			// 
+			this->lb_test->AutoSize = true;
+			this->lb_test->Location = System::Drawing::Point(517, 204);
+			this->lb_test->Name = L"lb_test";
+			this->lb_test->Size = System::Drawing::Size(35, 13);
+			this->lb_test->TabIndex = 2;
+			this->lb_test->Text = L"label1";
 			// 
 			// frmPrincipal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(674, 459);
+			this->ClientSize = System::Drawing::Size(819, 540);
 			this->Controls->Add(this->lb_test);
 			this->Controls->Add(this->menuStrip1);
 			this->IsMdiContainer = true;
@@ -262,5 +268,15 @@ namespace ControldeCalidadView{
 		this->iniciarToolStripMenuItem->Enabled = VentanaIniciar->procIniciado;
 		this->timer1->Stop();
 	}
-	};
+	private: System::Void usuarioToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		MantenimientoUsuarios^ VentanaMantUsuarios = gcnew MantenimientoUsuarios();
+		VentanaMantUsuarios->MdiParent = this;
+		VentanaMantUsuarios->Show();
+	}
+private: System::Void produccionToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+	MantLote^ VentanaMantLote = gcnew MantLote(this->objGestorLote);
+	VentanaMantLote->MdiParent = this;
+	VentanaMantLote->Show();
+}
+};
 }

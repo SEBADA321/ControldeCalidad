@@ -90,6 +90,7 @@ namespace ControldeCalidadView{
 			// 
 			this->textBox2->Location = System::Drawing::Point(259, 196);
 			this->textBox2->Name = L"textBox2";
+			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(176, 20);
 			this->textBox2->TabIndex = 3;
 			// 
