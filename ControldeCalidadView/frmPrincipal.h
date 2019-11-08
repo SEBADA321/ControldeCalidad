@@ -238,6 +238,8 @@ namespace ControldeCalidadView{
 		this->lb_test->Text = "Recibir serial";
 		this->timer1->Interval = 10;
 		this->objGestorLote->Deserializar();
+		this->objGestorLote->ListaLote->Clear();
+		this->objGestorLote->Serializar();
 	}
 
 			 //cierra el puerto

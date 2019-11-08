@@ -185,6 +185,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAgregarFruta.resx">
+      <DependentUpon>frmAgregarFruta.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmIniciarProceso.resx">
       <DependentUpon>frmIniciarProceso.h</DependentUpon>
     </EmbeddedResource>
