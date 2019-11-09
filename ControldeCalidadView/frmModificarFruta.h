@@ -154,6 +154,7 @@ namespace ControldeCalidadView{
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 7;
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmModificarFruta::textBox1_KeyPress);
 			// 
 			// textBox2
 			// 
@@ -168,6 +169,7 @@ namespace ControldeCalidadView{
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(100, 20);
 			this->textBox3->TabIndex = 9;
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmModificarFruta::textBox3_KeyPress);
 			// 
 			// textBox4
 			// 
@@ -241,5 +243,15 @@ namespace ControldeCalidadView{
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e){
 		this->Close();
 	}
-	};
+	private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+			e->Handled = true;
+		}
+	}
+private: System::Void textBox3_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+	if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+		e->Handled = true;
+	}
+}
+};
 }

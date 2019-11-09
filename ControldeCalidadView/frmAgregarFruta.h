@@ -112,6 +112,7 @@ namespace ControldeCalidadView {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(121, 20);
 			this->textBox1->TabIndex = 3;
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmAgregarFruta::textBox1_KeyPress);
 			// 
 			// label3
 			// 
@@ -201,7 +202,7 @@ namespace ControldeCalidadView {
 		this->nfruta = gcnew Fruta();
 		this->objGestorFruta = gcnew GestorFruta();
 		this->objGestorFruta->Deserializar();
-		for (int i = 0;this->objGestorFruta->ListaFruta->Count;i++){
+		for (int i = 0;i < this->objGestorFruta->ListaFruta->Count;i++){
 			this->comboBox1->Items->Add(this->objGestorFruta->ListaFruta[i]->nombre);
 		}
 	}
@@ -209,6 +210,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	if (!(this->textBox1->Text == "" || this->comboBox1->SelectedIndex == -1)){
 		this->nfruta->codigo = Convert::ToInt32(this->textBox1->Text);
 		this->nfruta->nombre = this->comboBox1->Text;
+		this->nfruta->color = "";
 		this->Close();
 		this->DialogResult = System::Windows::Forms::DialogResult::OK;
 	} else{
@@ -216,6 +218,11 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	}
 }
 private: System::Void frmAgregarFruta_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
+}
+private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+	if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+		e->Handled = true;
+	}
 }
 };
 }

@@ -138,13 +138,18 @@ namespace ControldeCalidadView{
 		}
 		if (correcto){
 			frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal(this->objGestorUsuario->ListaUsuarios[j]);
-			ventanaPrincipal->Show();
 			this->Hide();
+			if (ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::Cancel){
+				this->Close();
+			}
 		} else if (this->textBox1->Text == "admin" && this->textBox2->Text == "admin"){
 			frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal();
 			ventanaPrincipal->admin = true;
-			ventanaPrincipal->Show();
 			this->Hide();
+			if (ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::Cancel){
+				this->Close();
+			}
+			
 		} else{
 			MessageBox::Show("El usuario y/o contraseña no es correcto");
 		}

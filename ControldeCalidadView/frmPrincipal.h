@@ -218,6 +218,7 @@ namespace ControldeCalidadView{
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"frmPrincipal";
 			this->Text = L" ";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmPrincipal::frmPrincipal_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &frmPrincipal::VentanaP_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -279,6 +280,9 @@ private: System::Void produccionToolStripMenuItem_Click(System::Object^  sender,
 	MantLote^ VentanaMantLote = gcnew MantLote(this->objGestorLote);
 	VentanaMantLote->MdiParent = this;
 	VentanaMantLote->Show();
+}
+private: System::Void frmPrincipal_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
+	this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 }
 };
 }

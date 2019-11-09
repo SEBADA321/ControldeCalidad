@@ -3,6 +3,7 @@
 using namespace ControlCalidadModel;
 
 Lote::Lote(){
+	this->ListaFruta = gcnew List<Fruta^>();
 }
 
 Lote::Lote(int codigo, String^ EstadoLote, int NroFrutasPodridas, int NroFrutasNoPodridas,

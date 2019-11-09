@@ -151,6 +151,7 @@ namespace ControldeCalidadView{
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 7;
+			this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmNuevaFruta::textBox1_KeyPress);
 			// 
 			// textBox2
 			// 
@@ -165,6 +166,7 @@ namespace ControldeCalidadView{
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(100, 20);
 			this->textBox3->TabIndex = 9;
+			this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmNuevaFruta::textBox3_KeyPress);
 			// 
 			// textBox4
 			// 
@@ -207,23 +209,33 @@ namespace ControldeCalidadView{
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		int codigo = Convert::ToInt32(this->textBox1->Text);
-		String^ nombre = this->textBox2->Text;
-		int tamaño = Convert::ToInt32(this->textBox3->Text);
-		String^ color = this->textBox4->Text;
-		String^ estado;
-		if (this->comboBox1->Text == "Apto"){
-			estado = "Apto";
+		if (this->textBox1->Text == "" || this->textBox2->Text == "" || this->textBox3->Text == "" ||
+			this->textBox4->Text == "" || this->comboBox1->SelectedIndex == -1){
+			MessageBox::Show("Todos los campos deben estar completados");
 		} else{
-			estado = "Dañado";
+			int codigo = Convert::ToInt32(this->textBox1->Text);
+			String^ nombre = this->textBox2->Text;
+			int tamaño = Convert::ToInt32(this->textBox3->Text);
+			String^ color = this->textBox4->Text;
+			String^ estado = this->comboBox1->Text;
+			Fruta^ objFruta = gcnew Fruta(codigo, nombre, tamaño, color, estado);
+			this->objGestorFruta->AgregarFruta(objFruta);
+			MessageBox::Show("El tema ha sido registrado con éxito");
+			this->Close();
 		}
-		Fruta^ objFruta = gcnew Fruta(codigo, nombre, tamaño, color, estado);
-		this->objGestorFruta->AgregarFruta(objFruta);
-		MessageBox::Show("El tema ha sido registrado con éxito");
-		this->Close();
 	}
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e){
 		this->Close();
 	}
-	};
+	private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+			e->Handled = true;
+		}
+	}
+private: System::Void textBox3_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+	if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+		e->Handled = true;
+	}
+}
+};
 }
