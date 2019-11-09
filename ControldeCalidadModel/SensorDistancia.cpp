@@ -7,5 +7,3 @@ SensorDistancia::SensorDistancia(int RangoDistancia){
 
 ControlCalidadModel::SensorDistancia::SensorDistancia(){
 }
-
-

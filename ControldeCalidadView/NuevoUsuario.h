@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ControldeCalidadView {
+namespace ControldeCalidadView{
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -15,11 +15,9 @@ namespace ControldeCalidadView {
 	/// <summary>
 	/// Summary for NuevoUsuario
 	/// </summary>
-	public ref class NuevoUsuario : public System::Windows::Forms::Form
-	{
+	public ref class NuevoUsuario: public System::Windows::Forms::Form{
 	public:
-		NuevoUsuario(void)
-		{
+		NuevoUsuario(void){
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -30,10 +28,8 @@ namespace ControldeCalidadView {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~NuevoUsuario()
-		{
-			if (components)
-			{
+		~NuevoUsuario(){
+			if (components){
 				delete components;
 			}
 		}
@@ -83,8 +79,7 @@ namespace ControldeCalidadView {
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void){
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -237,17 +232,17 @@ namespace ControldeCalidadView {
 	private: System::Void NuevoUsuario_Load(System::Object^  sender, System::EventArgs^  e){
 		this->newUser = gcnew Usuario();
 	}
-private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-	this->newUser->apellidos = this->bt_apellidos->Text;
-	this->newUser->nombres = this->bt_nombres->Text;
-	this->newUser->codigo = Convert::ToInt32(this->bt_codigo->Text);
-	this->newUser->profesion = this->bt_profesion->Text;
-	if (this->bt_contrasena->Text == this->bt_rep_contrasena->Text){
-		this->newUser->password = this->bt_contrasena->Text;
-		this->Close();
-	} else{
-		MessageBox::Show("Las contraseñas deben ser iguales");
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
+		this->newUser->apellidos = this->bt_apellidos->Text;
+		this->newUser->nombres = this->bt_nombres->Text;
+		this->newUser->codigo = Convert::ToInt32(this->bt_codigo->Text);
+		this->newUser->profesion = this->bt_profesion->Text;
+		if (this->bt_contrasena->Text == this->bt_rep_contrasena->Text){
+			this->newUser->password = this->bt_contrasena->Text;
+			this->Close();
+		} else{
+			MessageBox::Show("Las contraseñas deben ser iguales");
+		}
 	}
-}
-};
+	};
 }

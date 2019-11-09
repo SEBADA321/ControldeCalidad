@@ -54,6 +54,7 @@ namespace ControldeCalidadView{
 		/// the contents of this method with the code editor.
 		/// </summary>
 		void InitializeComponent(void){
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Login::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -64,7 +65,7 @@ namespace ControldeCalidadView{
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(134, 159);
+			this->label1->Location = System::Drawing::Point(259, 122);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(47, 13);
 			this->label1->TabIndex = 0;
@@ -73,7 +74,7 @@ namespace ControldeCalidadView{
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(134, 199);
+			this->label2->Location = System::Drawing::Point(242, 148);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(64, 13);
 			this->label2->TabIndex = 1;
@@ -81,14 +82,14 @@ namespace ControldeCalidadView{
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(259, 156);
+			this->textBox1->Location = System::Drawing::Point(312, 119);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(176, 20);
 			this->textBox1->TabIndex = 2;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(259, 196);
+			this->textBox2->Location = System::Drawing::Point(312, 145);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(176, 20);
@@ -96,7 +97,7 @@ namespace ControldeCalidadView{
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(321, 269);
+			this->button1->Location = System::Drawing::Point(356, 171);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 4;
@@ -114,8 +115,10 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Login";
-			this->Text = L"Login";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Sistema control de calidad PUCP";
 			this->Load += gcnew System::EventHandler(this, &Login::Login_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -149,7 +152,7 @@ namespace ControldeCalidadView{
 			if (ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::Cancel){
 				this->Close();
 			}
-			
+
 		} else{
 			MessageBox::Show("El usuario y/o contraseña no es correcto");
 		}

@@ -7,7 +7,7 @@ Lote::Lote(){
 }
 
 Lote::Lote(int codigo, String^ EstadoLote, int NroFrutasPodridas, int NroFrutasNoPodridas,
-					   int NroLote, List<Fruta^>^ listadefrutas, String^ FechaProduccion, Usuario^ usuario){
+		   int NroLote, List<Fruta^>^ listadefrutas, String^ FechaProduccion, Usuario^ usuario){
 	this->codigo = codigo;
 	this->EstadoLote = EstadoLote;
 	this->NroFrutasPodridas = NroFrutasPodridas;

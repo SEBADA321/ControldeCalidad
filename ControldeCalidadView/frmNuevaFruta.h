@@ -232,10 +232,10 @@ namespace ControldeCalidadView{
 			e->Handled = true;
 		}
 	}
-private: System::Void textBox3_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
-	if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
-		e->Handled = true;
+	private: System::Void textBox3_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+			e->Handled = true;
+		}
 	}
-}
-};
+	};
 }

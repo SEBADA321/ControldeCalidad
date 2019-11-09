@@ -201,12 +201,12 @@ namespace ControldeCalidadView{
 			this->dataGridView1->Rows->Add(fila);
 		}
 	}
-private: System::Void MantenimientoUsuarios_Load(System::Object^  sender, System::EventArgs^  e){
-	this->objGestorUsuarios->Deserializar();
-	MostrarGrilla();
-}
-private: System::Void MantenimientoUsuarios_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
-	this->objGestorUsuarios->Serializar();
-}
-};
+	private: System::Void MantenimientoUsuarios_Load(System::Object^  sender, System::EventArgs^  e){
+		this->objGestorUsuarios->Deserializar();
+		MostrarGrilla();
+	}
+	private: System::Void MantenimientoUsuarios_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
+		this->objGestorUsuarios->Serializar();
+	}
+	};
 }

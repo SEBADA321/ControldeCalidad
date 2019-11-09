@@ -78,6 +78,7 @@ namespace ControldeCalidadView{
 		/// </summary>
 		void InitializeComponent(void){
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(frmPrincipal::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->mantenimientoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->frutaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -201,7 +202,7 @@ namespace ControldeCalidadView{
 			// lb_test
 			// 
 			this->lb_test->AutoSize = true;
-			this->lb_test->Location = System::Drawing::Point(517, 204);
+			this->lb_test->Location = System::Drawing::Point(734, 484);
 			this->lb_test->Name = L"lb_test";
 			this->lb_test->Size = System::Drawing::Size(35, 13);
 			this->lb_test->TabIndex = 2;
@@ -214,9 +215,11 @@ namespace ControldeCalidadView{
 			this->ClientSize = System::Drawing::Size(819, 540);
 			this->Controls->Add(this->lb_test);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"frmPrincipal";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L" ";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmPrincipal::frmPrincipal_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &frmPrincipal::VentanaP_Load);
@@ -276,13 +279,13 @@ namespace ControldeCalidadView{
 		VentanaMantUsuarios->MdiParent = this;
 		VentanaMantUsuarios->Show();
 	}
-private: System::Void produccionToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-	MantLote^ VentanaMantLote = gcnew MantLote(this->objGestorLote);
-	VentanaMantLote->MdiParent = this;
-	VentanaMantLote->Show();
-}
-private: System::Void frmPrincipal_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
-	this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-}
-};
+	private: System::Void produccionToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		MantLote^ VentanaMantLote = gcnew MantLote(this->objGestorLote);
+		VentanaMantLote->MdiParent = this;
+		VentanaMantLote->Show();
+	}
+	private: System::Void frmPrincipal_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
+		this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+	}
+	};
 }

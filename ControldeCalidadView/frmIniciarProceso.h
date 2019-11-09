@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ControldeCalidadView {
+namespace ControldeCalidadView{
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -15,8 +15,7 @@ namespace ControldeCalidadView {
 	/// <summary>
 	/// Summary for frmIniciarProceso
 	/// </summary>
-	public ref class frmIniciarProceso : public System::Windows::Forms::Form
-	{
+	public ref class frmIniciarProceso: public System::Windows::Forms::Form{
 	public:
 		frmIniciarProceso(void){
 			InitializeComponent();
@@ -35,10 +34,8 @@ namespace ControldeCalidadView {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~frmIniciarProceso()
-		{
-			if (components)
-			{
+		~frmIniciarProceso(){
+			if (components){
 				delete components;
 			}
 		}
@@ -75,8 +72,7 @@ namespace ControldeCalidadView {
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void){
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -287,5 +283,5 @@ namespace ControldeCalidadView {
 		this->textBox5->Text = Convert::ToString(this->objGestorLote->ListaLote[this->comboBox1->SelectedIndex]->NroLote);
 		this->textBox6->Text = this->objGestorLote->ListaLote[this->comboBox1->SelectedIndex]->FechaProduccion;
 	}
-};
+	};
 }
