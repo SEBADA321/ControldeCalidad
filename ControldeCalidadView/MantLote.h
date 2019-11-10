@@ -47,6 +47,8 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column5;
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
 
 
 
@@ -71,6 +73,8 @@ namespace ControldeCalidadView{
 				 this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 				 this->Column5 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 				 this->button1 = (gcnew System::Windows::Forms::Button());
+				 this->button2 = (gcnew System::Windows::Forms::Button());
+				 this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 				 this->SuspendLayout();
 				 // 
@@ -82,7 +86,7 @@ namespace ControldeCalidadView{
 					 this->Column1,
 						 this->Column4, this->Column2, this->Column3, this->Column5
 				 });
-				 this->dataGridView1->Location = System::Drawing::Point(49, 166);
+				 this->dataGridView1->Location = System::Drawing::Point(50, 93);
 				 this->dataGridView1->Name = L"dataGridView1";
 				 this->dataGridView1->Size = System::Drawing::Size(548, 167);
 				 this->dataGridView1->TabIndex = 0;
@@ -114,7 +118,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // button1
 				 // 
-				 this->button1->Location = System::Drawing::Point(280, 357);
+				 this->button1->Location = System::Drawing::Point(281, 284);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(75, 23);
 				 this->button1->TabIndex = 1;
@@ -122,14 +126,34 @@ namespace ControldeCalidadView{
 				 this->button1->UseVisualStyleBackColor = true;
 				 this->button1->Click += gcnew System::EventHandler(this, &MantLote::button1_Click);
 				 // 
+				 // button2
+				 // 
+				 this->button2->Location = System::Drawing::Point(411, 41);
+				 this->button2->Name = L"button2";
+				 this->button2->Size = System::Drawing::Size(75, 23);
+				 this->button2->TabIndex = 2;
+				 this->button2->Text = L"Buscar";
+				 this->button2->UseVisualStyleBackColor = true;
+				 // 
+				 // dateTimePicker1
+				 // 
+				 this->dateTimePicker1->Location = System::Drawing::Point(163, 42);
+				 this->dateTimePicker1->Name = L"dateTimePicker1";
+				 this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
+				 this->dateTimePicker1->TabIndex = 3;
+				 // 
 				 // MantLote
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-				 this->ClientSize = System::Drawing::Size(649, 416);
+				 this->ClientSize = System::Drawing::Size(649, 338);
+				 this->Controls->Add(this->dateTimePicker1);
+				 this->Controls->Add(this->button2);
 				 this->Controls->Add(this->button1);
 				 this->Controls->Add(this->dataGridView1);
+				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->Name = L"MantLote";
+				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"MantLote";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MantLote::MantLote_FormClosed);
 				 this->Load += gcnew System::EventHandler(this, &MantLote::MantLote_Load);

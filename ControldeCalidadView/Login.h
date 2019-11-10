@@ -65,7 +65,7 @@ namespace ControldeCalidadView{
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(259, 122);
+			this->label1->Location = System::Drawing::Point(286, 134);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(47, 13);
 			this->label1->TabIndex = 0;
@@ -74,7 +74,7 @@ namespace ControldeCalidadView{
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(242, 148);
+			this->label2->Location = System::Drawing::Point(269, 160);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(64, 13);
 			this->label2->TabIndex = 1;
@@ -82,14 +82,14 @@ namespace ControldeCalidadView{
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(312, 119);
+			this->textBox1->Location = System::Drawing::Point(339, 131);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(176, 20);
 			this->textBox1->TabIndex = 2;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(312, 145);
+			this->textBox2->Location = System::Drawing::Point(339, 157);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(176, 20);
@@ -97,7 +97,7 @@ namespace ControldeCalidadView{
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(356, 171);
+			this->button1->Location = System::Drawing::Point(383, 183);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 4;
@@ -115,6 +115,7 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Login";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;

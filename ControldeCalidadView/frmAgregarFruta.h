@@ -75,7 +75,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // button1
 				 // 
-				 this->button1->Location = System::Drawing::Point(102, 211);
+				 this->button1->Location = System::Drawing::Point(101, 168);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(75, 23);
 				 this->button1->TabIndex = 0;
@@ -86,7 +86,7 @@ namespace ControldeCalidadView{
 				 // label1
 				 // 
 				 this->label1->AutoSize = true;
-				 this->label1->Location = System::Drawing::Point(35, 61);
+				 this->label1->Location = System::Drawing::Point(26, 18);
 				 this->label1->Name = L"label1";
 				 this->label1->Size = System::Drawing::Size(43, 13);
 				 this->label1->TabIndex = 1;
@@ -95,7 +95,7 @@ namespace ControldeCalidadView{
 				 // label2
 				 // 
 				 this->label2->AutoSize = true;
-				 this->label2->Location = System::Drawing::Point(35, 87);
+				 this->label2->Location = System::Drawing::Point(26, 44);
 				 this->label2->Name = L"label2";
 				 this->label2->Size = System::Drawing::Size(47, 13);
 				 this->label2->TabIndex = 2;
@@ -103,7 +103,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // textBox1
 				 // 
-				 this->textBox1->Location = System::Drawing::Point(139, 58);
+				 this->textBox1->Location = System::Drawing::Point(130, 15);
 				 this->textBox1->Name = L"textBox1";
 				 this->textBox1->Size = System::Drawing::Size(121, 20);
 				 this->textBox1->TabIndex = 3;
@@ -112,7 +112,7 @@ namespace ControldeCalidadView{
 				 // label3
 				 // 
 				 this->label3->AutoSize = true;
-				 this->label3->Location = System::Drawing::Point(35, 114);
+				 this->label3->Location = System::Drawing::Point(26, 71);
 				 this->label3->Name = L"label3";
 				 this->label3->Size = System::Drawing::Size(49, 13);
 				 this->label3->TabIndex = 5;
@@ -121,7 +121,7 @@ namespace ControldeCalidadView{
 				 // label4
 				 // 
 				 this->label4->AutoSize = true;
-				 this->label4->Location = System::Drawing::Point(35, 140);
+				 this->label4->Location = System::Drawing::Point(26, 97);
 				 this->label4->Name = L"label4";
 				 this->label4->Size = System::Drawing::Size(34, 13);
 				 this->label4->TabIndex = 6;
@@ -130,7 +130,7 @@ namespace ControldeCalidadView{
 				 // label5
 				 // 
 				 this->label5->AutoSize = true;
-				 this->label5->Location = System::Drawing::Point(35, 168);
+				 this->label5->Location = System::Drawing::Point(26, 125);
 				 this->label5->Name = L"label5";
 				 this->label5->Size = System::Drawing::Size(43, 13);
 				 this->label5->TabIndex = 7;
@@ -138,7 +138,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // textBox3
 				 // 
-				 this->textBox3->Location = System::Drawing::Point(139, 111);
+				 this->textBox3->Location = System::Drawing::Point(130, 68);
 				 this->textBox3->Name = L"textBox3";
 				 this->textBox3->ReadOnly = true;
 				 this->textBox3->Size = System::Drawing::Size(121, 20);
@@ -146,7 +146,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // textBox4
 				 // 
-				 this->textBox4->Location = System::Drawing::Point(139, 137);
+				 this->textBox4->Location = System::Drawing::Point(130, 94);
 				 this->textBox4->Name = L"textBox4";
 				 this->textBox4->ReadOnly = true;
 				 this->textBox4->Size = System::Drawing::Size(121, 20);
@@ -154,7 +154,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // textBox5
 				 // 
-				 this->textBox5->Location = System::Drawing::Point(139, 165);
+				 this->textBox5->Location = System::Drawing::Point(130, 122);
 				 this->textBox5->Name = L"textBox5";
 				 this->textBox5->ReadOnly = true;
 				 this->textBox5->Size = System::Drawing::Size(121, 20);
@@ -163,7 +163,7 @@ namespace ControldeCalidadView{
 				 // comboBox1
 				 // 
 				 this->comboBox1->FormattingEnabled = true;
-				 this->comboBox1->Location = System::Drawing::Point(139, 84);
+				 this->comboBox1->Location = System::Drawing::Point(130, 41);
 				 this->comboBox1->Name = L"comboBox1";
 				 this->comboBox1->Size = System::Drawing::Size(121, 21);
 				 this->comboBox1->TabIndex = 11;
@@ -172,7 +172,7 @@ namespace ControldeCalidadView{
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-				 this->ClientSize = System::Drawing::Size(276, 295);
+				 this->ClientSize = System::Drawing::Size(276, 209);
 				 this->Controls->Add(this->comboBox1);
 				 this->Controls->Add(this->textBox5);
 				 this->Controls->Add(this->textBox4);
@@ -184,7 +184,9 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->label2);
 				 this->Controls->Add(this->label1);
 				 this->Controls->Add(this->button1);
+				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->Name = L"frmAgregarFruta";
+				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"frmAgregarFruta";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmAgregarFruta::frmAgregarFruta_FormClosed);
 				 this->Load += gcnew System::EventHandler(this, &frmAgregarFruta::frmAgregarFruta_Load);

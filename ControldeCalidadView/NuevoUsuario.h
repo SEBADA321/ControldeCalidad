@@ -41,33 +41,13 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::Label^  label6;
-
-
-
-
-
-
-
 	private: System::Windows::Forms::TextBox^  bt_codigo;
 	private: System::Windows::Forms::TextBox^  bt_nombres;
 	private: System::Windows::Forms::TextBox^  bt_apellidos;
 	private: System::Windows::Forms::TextBox^  bt_profesion;
 	private: System::Windows::Forms::TextBox^  bt_contrasena;
 	private: System::Windows::Forms::TextBox^  bt_rep_contrasena;
-
 	public:
-
-
-
-
-
-
-
-
-
-
-
-
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -97,7 +77,7 @@ namespace ControldeCalidadView{
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(219, 421);
+			this->button1->Location = System::Drawing::Point(134, 187);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 0;
@@ -108,7 +88,7 @@ namespace ControldeCalidadView{
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(54, 89);
+			this->label1->Location = System::Drawing::Point(17, 15);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(43, 13);
 			this->label1->TabIndex = 1;
@@ -117,7 +97,7 @@ namespace ControldeCalidadView{
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(54, 140);
+			this->label2->Location = System::Drawing::Point(17, 41);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(52, 13);
 			this->label2->TabIndex = 2;
@@ -126,70 +106,70 @@ namespace ControldeCalidadView{
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(54, 191);
+			this->label3->Location = System::Drawing::Point(17, 67);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(49, 13);
+			this->label3->Size = System::Drawing::Size(52, 13);
 			this->label3->TabIndex = 3;
-			this->label3->Text = L"Apellidos";
+			this->label3->Text = L"Apellidos:";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(54, 242);
+			this->label4->Location = System::Drawing::Point(17, 93);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(51, 13);
+			this->label4->Size = System::Drawing::Size(54, 13);
 			this->label4->TabIndex = 4;
-			this->label4->Text = L"Profesión";
+			this->label4->Text = L"Profesión:";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(54, 293);
+			this->label5->Location = System::Drawing::Point(17, 119);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(61, 13);
+			this->label5->Size = System::Drawing::Size(64, 13);
 			this->label5->TabIndex = 5;
-			this->label5->Text = L"Contraseña";
+			this->label5->Text = L"Contraseña:";
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(54, 344);
+			this->label6->Location = System::Drawing::Point(17, 145);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(97, 13);
+			this->label6->Size = System::Drawing::Size(100, 13);
 			this->label6->TabIndex = 6;
-			this->label6->Text = L"Repetir contraseña";
+			this->label6->Text = L"Repetir contraseña:";
 			// 
 			// bt_codigo
 			// 
-			this->bt_codigo->Location = System::Drawing::Point(219, 86);
+			this->bt_codigo->Location = System::Drawing::Point(137, 12);
 			this->bt_codigo->Name = L"bt_codigo";
 			this->bt_codigo->Size = System::Drawing::Size(185, 20);
 			this->bt_codigo->TabIndex = 7;
 			// 
 			// bt_nombres
 			// 
-			this->bt_nombres->Location = System::Drawing::Point(219, 137);
+			this->bt_nombres->Location = System::Drawing::Point(137, 38);
 			this->bt_nombres->Name = L"bt_nombres";
 			this->bt_nombres->Size = System::Drawing::Size(185, 20);
 			this->bt_nombres->TabIndex = 8;
 			// 
 			// bt_apellidos
 			// 
-			this->bt_apellidos->Location = System::Drawing::Point(219, 188);
+			this->bt_apellidos->Location = System::Drawing::Point(137, 64);
 			this->bt_apellidos->Name = L"bt_apellidos";
 			this->bt_apellidos->Size = System::Drawing::Size(185, 20);
 			this->bt_apellidos->TabIndex = 9;
 			// 
 			// bt_profesion
 			// 
-			this->bt_profesion->Location = System::Drawing::Point(219, 239);
+			this->bt_profesion->Location = System::Drawing::Point(137, 90);
 			this->bt_profesion->Name = L"bt_profesion";
 			this->bt_profesion->Size = System::Drawing::Size(185, 20);
 			this->bt_profesion->TabIndex = 10;
 			// 
 			// bt_contrasena
 			// 
-			this->bt_contrasena->Location = System::Drawing::Point(219, 290);
+			this->bt_contrasena->Location = System::Drawing::Point(137, 116);
 			this->bt_contrasena->Name = L"bt_contrasena";
 			this->bt_contrasena->PasswordChar = '*';
 			this->bt_contrasena->Size = System::Drawing::Size(185, 20);
@@ -197,7 +177,7 @@ namespace ControldeCalidadView{
 			// 
 			// bt_rep_contrasena
 			// 
-			this->bt_rep_contrasena->Location = System::Drawing::Point(219, 341);
+			this->bt_rep_contrasena->Location = System::Drawing::Point(137, 142);
 			this->bt_rep_contrasena->Name = L"bt_rep_contrasena";
 			this->bt_rep_contrasena->PasswordChar = '*';
 			this->bt_rep_contrasena->Size = System::Drawing::Size(185, 20);
@@ -207,7 +187,7 @@ namespace ControldeCalidadView{
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(536, 474);
+			this->ClientSize = System::Drawing::Size(342, 222);
 			this->Controls->Add(this->bt_rep_contrasena);
 			this->Controls->Add(this->bt_contrasena);
 			this->Controls->Add(this->bt_profesion);
@@ -222,7 +202,7 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Name = L"NuevoUsuario";
-			this->Text = L"NuevoUsuario";
+			this->Text = L"Nuevo Usuario";
 			this->Load += gcnew System::EventHandler(this, &NuevoUsuario::NuevoUsuario_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();

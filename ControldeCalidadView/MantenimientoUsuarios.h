@@ -68,16 +68,16 @@ namespace ControldeCalidadView{
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(177, 357);
+			this->button1->Location = System::Drawing::Point(193, 311);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(107, 23);
 			this->button1->TabIndex = 0;
@@ -87,14 +87,14 @@ namespace ControldeCalidadView{
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(37, 80);
+			this->textBox1->Location = System::Drawing::Point(92, 68);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(204, 20);
 			this->textBox1->TabIndex = 1;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(247, 78);
+			this->button2->Location = System::Drawing::Point(302, 66);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 2;
@@ -109,7 +109,7 @@ namespace ControldeCalidadView{
 				this->Column1,
 					this->Column2, this->Column3, this->Column4
 			});
-			this->dataGridView1->Location = System::Drawing::Point(32, 201);
+			this->dataGridView1->Location = System::Drawing::Point(22, 140);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(449, 150);
@@ -134,14 +134,22 @@ namespace ControldeCalidadView{
 			this->Column3->Name = L"Column3";
 			this->Column3->ReadOnly = true;
 			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Profesión";
+			this->Column4->Name = L"Column4";
+			this->Column4->ReadOnly = true;
+			// 
 			// groupBox1
 			// 
+			this->groupBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																						 | System::Windows::Forms::AnchorStyles::Right));
 			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->button2);
-			this->groupBox1->Location = System::Drawing::Point(60, 65);
+			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(382, 130);
+			this->groupBox1->Size = System::Drawing::Size(469, 122);
 			this->groupBox1->TabIndex = 5;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Buscar";
@@ -150,27 +158,23 @@ namespace ControldeCalidadView{
 			// 
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4){ L"Código", L"Nombres", L"Apellidos", L"Profesión" });
-			this->comboBox1->Location = System::Drawing::Point(37, 42);
+			this->comboBox1->Location = System::Drawing::Point(92, 30);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(204, 21);
 			this->comboBox1->TabIndex = 3;
-			// 
-			// Column4
-			// 
-			this->Column4->HeaderText = L"Profesión";
-			this->Column4->Name = L"Column4";
-			this->Column4->ReadOnly = true;
 			// 
 			// MantenimientoUsuarios
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(493, 455);
+			this->ClientSize = System::Drawing::Size(493, 359);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"MantenimientoUsuarios";
-			this->Text = L"MantenimientoUsuarios";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->Text = L"Usuarios";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MantenimientoUsuarios::MantenimientoUsuarios_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &MantenimientoUsuarios::MantenimientoUsuarios_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();

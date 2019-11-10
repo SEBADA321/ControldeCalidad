@@ -188,7 +188,7 @@ namespace ControldeCalidadView{
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
+			this->ClientSize = System::Drawing::Size(284, 225);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->textBox3);
@@ -201,7 +201,9 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"frmNuevaFruta";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"frmNuevaFruta";
 			this->ResumeLayout(false);
 			this->PerformLayout();

@@ -87,6 +87,8 @@ namespace ControldeCalidadView{
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																						 | System::Windows::Forms::AnchorStyles::Right));
 			this->groupBox1->Controls->Add(this->bt_act);
 			this->groupBox1->Controls->Add(this->cb_baudrate);
 			this->groupBox1->Controls->Add(this->lista_puertos);
@@ -94,7 +96,7 @@ namespace ControldeCalidadView{
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(372, 143);
+			this->groupBox1->Size = System::Drawing::Size(372, 110);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Serial";
@@ -153,18 +155,20 @@ namespace ControldeCalidadView{
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+																						 | System::Windows::Forms::AnchorStyles::Right));
 			this->groupBox2->Controls->Add(this->tb_int);
 			this->groupBox2->Controls->Add(this->lb_timer);
-			this->groupBox2->Location = System::Drawing::Point(12, 161);
+			this->groupBox2->Location = System::Drawing::Point(12, 128);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(372, 113);
+			this->groupBox2->Size = System::Drawing::Size(372, 91);
 			this->groupBox2->TabIndex = 1;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Timer";
 			// 
 			// tb_int
 			// 
-			this->tb_int->Location = System::Drawing::Point(130, 45);
+			this->tb_int->Location = System::Drawing::Point(182, 45);
 			this->tb_int->Name = L"tb_int";
 			this->tb_int->Size = System::Drawing::Size(100, 20);
 			this->tb_int->TabIndex = 5;
@@ -173,7 +177,7 @@ namespace ControldeCalidadView{
 			// lb_timer
 			// 
 			this->lb_timer->AutoSize = true;
-			this->lb_timer->Location = System::Drawing::Point(51, 48);
+			this->lb_timer->Location = System::Drawing::Point(103, 48);
 			this->lb_timer->Name = L"lb_timer";
 			this->lb_timer->Size = System::Drawing::Size(70, 13);
 			this->lb_timer->TabIndex = 0;
@@ -181,7 +185,8 @@ namespace ControldeCalidadView{
 			// 
 			// bt_guardar
 			// 
-			this->bt_guardar->Location = System::Drawing::Point(153, 291);
+			this->bt_guardar->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->bt_guardar->Location = System::Drawing::Point(161, 225);
 			this->bt_guardar->Name = L"bt_guardar";
 			this->bt_guardar->Size = System::Drawing::Size(75, 23);
 			this->bt_guardar->TabIndex = 6;
@@ -193,7 +198,7 @@ namespace ControldeCalidadView{
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(396, 348);
+			this->ClientSize = System::Drawing::Size(396, 265);
 			this->Controls->Add(this->bt_guardar);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
