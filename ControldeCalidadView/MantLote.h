@@ -153,6 +153,7 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->dataGridView1);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->Name = L"MantLote";
+				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"MantLote";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MantLote::MantLote_FormClosed);

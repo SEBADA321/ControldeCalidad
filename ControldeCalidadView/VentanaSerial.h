@@ -203,6 +203,8 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"VentanaSerial";
+			this->ShowInTaskbar = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"VentanaSerial";
 			this->Load += gcnew System::EventHandler(this, &VentanaSerial::VentanaSerial_Load);
 			this->groupBox1->ResumeLayout(false);

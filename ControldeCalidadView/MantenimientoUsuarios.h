@@ -173,6 +173,7 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"MantenimientoUsuarios";
+			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Usuarios";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MantenimientoUsuarios::MantenimientoUsuarios_FormClosed);
@@ -189,9 +190,11 @@ namespace ControldeCalidadView{
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		NuevoUsuario^ VentanaNuevoUsuario = gcnew NuevoUsuario();
-		VentanaNuevoUsuario->ShowDialog();
-		this->objGestorUsuarios->AgregarUsuario(VentanaNuevoUsuario->newUser);
-		MostrarGrilla();
+		if (VentanaNuevoUsuario->ShowDialog() == System::Windows::Forms::DialogResult::OK){
+			this->objGestorUsuarios->AgregarUsuario(VentanaNuevoUsuario->newUser);
+			MostrarGrilla();
+		}
+		
 	}
 	private: void MostrarGrilla(){
 		this->dataGridView1->Rows->Clear();

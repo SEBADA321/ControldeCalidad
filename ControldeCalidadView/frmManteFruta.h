@@ -198,8 +198,10 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"frmManteFruta";
-			this->Text = L"frmManteFruta";
+			this->ShowInTaskbar = false;
+			this->Text = L"Mantenimiento Fruta";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmManteFruta::frmManteFruta_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &frmManteFruta::frmManteFruta_Load);
 			this->groupBox1->ResumeLayout(false);

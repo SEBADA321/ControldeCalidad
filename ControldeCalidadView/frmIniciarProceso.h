@@ -257,7 +257,9 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"frmIniciarProceso";
+			this->ShowInTaskbar = false;
 			this->Text = L"frmIniciarProceso";
 			this->Load += gcnew System::EventHandler(this, &frmIniciarProceso::frmIniciarProceso_Load);
 			this->groupBox1->ResumeLayout(false);

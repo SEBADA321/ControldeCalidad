@@ -201,7 +201,9 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"NuevoUsuario";
+			this->ShowInTaskbar = false;
 			this->Text = L"Nuevo Usuario";
 			this->Load += gcnew System::EventHandler(this, &NuevoUsuario::NuevoUsuario_Load);
 			this->ResumeLayout(false);
@@ -213,15 +215,21 @@ namespace ControldeCalidadView{
 		this->newUser = gcnew Usuario();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		this->newUser->apellidos = this->bt_apellidos->Text;
-		this->newUser->nombres = this->bt_nombres->Text;
-		this->newUser->codigo = Convert::ToInt32(this->bt_codigo->Text);
-		this->newUser->profesion = this->bt_profesion->Text;
-		if (this->bt_contrasena->Text == this->bt_rep_contrasena->Text){
-			this->newUser->password = this->bt_contrasena->Text;
-			this->Close();
+		if (!(this->bt_apellidos->Text == "" || this->bt_nombres->Text == "" || this->bt_codigo->Text == "" ||
+			  this->bt_profesion->Text == "" || this->bt_contrasena->Text == "")){
+			this->newUser->apellidos = this->bt_apellidos->Text;
+			this->newUser->nombres = this->bt_nombres->Text;
+			this->newUser->codigo = Convert::ToInt32(this->bt_codigo->Text);
+			this->newUser->profesion = this->bt_profesion->Text;
+			if (this->bt_contrasena->Text == this->bt_rep_contrasena->Text){
+				this->newUser->password = this->bt_contrasena->Text;
+				this->Close();
+				this->DialogResult = System::Windows::Forms::DialogResult::OK;
+			} else{
+				MessageBox::Show("Las contraseñas deben ser iguales");
+			}
 		} else{
-			MessageBox::Show("Las contraseñas deben ser iguales");
+			MessageBox::Show("Debe completar todos los campos");
 		}
 	}
 	};

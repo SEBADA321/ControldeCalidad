@@ -252,6 +252,7 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->groupBox1);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->Name = L"NuevoLote";
+				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"Nuevo Lote";
 				 this->Load += gcnew System::EventHandler(this, &NuevoLote::NuevoLote_Load);

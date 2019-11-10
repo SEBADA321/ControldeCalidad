@@ -220,7 +220,7 @@ namespace ControldeCalidadView{
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"frmPrincipal";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L" ";
+			this->Text = L" Sistema control de calidad PUCP";
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmPrincipal::frmPrincipal_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &frmPrincipal::VentanaP_Load);
 			this->menuStrip1->ResumeLayout(false);

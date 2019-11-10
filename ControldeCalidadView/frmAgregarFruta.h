@@ -184,10 +184,11 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->label2);
 				 this->Controls->Add(this->label1);
 				 this->Controls->Add(this->button1);
-				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 				 this->Name = L"frmAgregarFruta";
+				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-				 this->Text = L"frmAgregarFruta";
+				 this->Text = L"Agregar Fruta";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmAgregarFruta::frmAgregarFruta_FormClosed);
 				 this->Load += gcnew System::EventHandler(this, &frmAgregarFruta::frmAgregarFruta_Load);
 				 this->ResumeLayout(false);

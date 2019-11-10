@@ -203,8 +203,9 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"frmNuevaFruta";
+			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"frmNuevaFruta";
+			this->Text = L"Nueva Fruta";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

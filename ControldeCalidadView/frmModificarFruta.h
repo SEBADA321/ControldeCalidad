@@ -191,6 +191,7 @@ namespace ControldeCalidadView{
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(284, 214);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->textBox4);
@@ -206,8 +207,9 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"frmModificarFruta";
+			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"frmModificarFruta";
+			this->Text = L"Modificar";
 			this->Load += gcnew System::EventHandler(this, &frmModificarFruta::frmModificarFruta_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
