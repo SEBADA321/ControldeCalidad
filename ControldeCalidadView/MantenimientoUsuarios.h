@@ -48,6 +48,8 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column4;
+	private: System::Windows::Forms::Button^  button3;
+
 
 	private:
 		/// <summary>
@@ -61,6 +63,7 @@ namespace ControldeCalidadView{
 		/// the contents of this method with the code editor.
 		/// </summary>
 		void InitializeComponent(void){
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MantenimientoUsuarios::typeid));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -71,13 +74,14 @@ namespace ControldeCalidadView{
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(193, 311);
+			this->button1->Location = System::Drawing::Point(140, 311);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(107, 23);
 			this->button1->TabIndex = 0;
@@ -114,7 +118,9 @@ namespace ControldeCalidadView{
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(449, 150);
 			this->dataGridView1->TabIndex = 4;
+			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellClick);
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellContentClick);
+			this->dataGridView1->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellDoubleClick);
 			// 
 			// Column1
 			// 
@@ -163,15 +169,27 @@ namespace ControldeCalidadView{
 			this->comboBox1->Size = System::Drawing::Size(204, 21);
 			this->comboBox1->TabIndex = 3;
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(253, 311);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(100, 23);
+			this->button3->TabIndex = 6;
+			this->button3->Text = L"Eliminar";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MantenimientoUsuarios::button3_Click);
+			// 
 			// MantenimientoUsuarios
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(493, 359);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MantenimientoUsuarios";
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
@@ -187,6 +205,8 @@ namespace ControldeCalidadView{
 #pragma endregion
 	private: System::Void dataGridView1_CellContentClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
 		//this->dataGridView1->Rows[0]->Selected = this->dataGridView1->SelectedRows[0]->Cells[0]->RowIndex;
+		//this->dataGridView1->SelectedRows[0]->Cells[0]->Value;
+		//this->dataGridView1->Rows[0]->Selected = e->ColumnIndex;
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		NuevoUsuario^ VentanaNuevoUsuario = gcnew NuevoUsuario();
@@ -215,5 +235,15 @@ namespace ControldeCalidadView{
 	private: System::Void MantenimientoUsuarios_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 		this->objGestorUsuarios->Serializar();
 	}
-	};
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e){
+		//this->objGestorUsuarios->EliminarUsuarioxCodigo(Convert::ToInt32(this->dataGridView1->SelectedRows[0]->Cells[0]->Value));
+		this->objGestorUsuarios->EliminarUsuarioxCodigo(Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedCells[0]->RowIndex]->Cells[0]->Value));
+		MostrarGrilla();
+	}
+private: System::Void dataGridView1_CellClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
+}
+private: System::Void dataGridView1_CellDoubleClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
+	this->dataGridView1->Rows[e->RowIndex]->Selected = true;
+}
+};
 }
