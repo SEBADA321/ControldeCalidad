@@ -89,7 +89,7 @@ namespace ControldeCalidadView{
 				 this->dataGridView1->Location = System::Drawing::Point(50, 93);
 				 this->dataGridView1->Name = L"dataGridView1";
 				 this->dataGridView1->Size = System::Drawing::Size(548, 167);
-				 this->dataGridView1->TabIndex = 0;
+				 this->dataGridView1->TabIndex = 3;
 				 // 
 				 // Column1
 				 // 
@@ -121,7 +121,7 @@ namespace ControldeCalidadView{
 				 this->button1->Location = System::Drawing::Point(281, 284);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(75, 23);
-				 this->button1->TabIndex = 1;
+				 this->button1->TabIndex = 4;
 				 this->button1->Text = L"Agregar";
 				 this->button1->UseVisualStyleBackColor = true;
 				 this->button1->Click += gcnew System::EventHandler(this, &MantLote::button1_Click);
@@ -140,7 +140,7 @@ namespace ControldeCalidadView{
 				 this->dateTimePicker1->Location = System::Drawing::Point(163, 42);
 				 this->dateTimePicker1->Name = L"dateTimePicker1";
 				 this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
-				 this->dateTimePicker1->TabIndex = 3;
+				 this->dateTimePicker1->TabIndex = 1;
 				 // 
 				 // MantLote
 				 // 
@@ -164,13 +164,14 @@ namespace ControldeCalidadView{
 			 }
 #pragma endregion
 	private: System::Void MantLote_Load(System::Object^  sender, System::EventArgs^  e){
+		this->objGestorLote->Deserializar();
 		MostrarGrilla();
 	}
 
 	private: void MostrarGrilla(){
 		this->dataGridView1->Rows->Clear();
 		for (int i = 0; i < this->objGestorLote->ListaLote->Count; i++){
-			array<String^>^ fila = gcnew array<String^>(4);
+			array<String^>^ fila = gcnew array<String^>(5);
 			fila[0] = Convert::ToString(this->objGestorLote->ListaLote[i]->codigo);
 			fila[1] = Convert::ToString(this->objGestorLote->ListaLote[i]->NroLote);
 			fila[2] = this->objGestorLote->ListaLote[i]->EstadoLote;
@@ -181,8 +182,10 @@ namespace ControldeCalidadView{
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		NuevoLote^ VentanaNuevoLote = gcnew NuevoLote();
-		VentanaNuevoLote->Show();
-		this->objGestorLote->AgregarLote(VentanaNuevoLote->nLote);
+		if (VentanaNuevoLote->ShowDialog() == System::Windows::Forms::DialogResult::OK){
+			this->objGestorLote->ListaLote->Add(VentanaNuevoLote->nLote);
+			MostrarGrilla();
+		}
 	}
 	private: System::Void MantLote_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 		this->objGestorLote->Serializar();

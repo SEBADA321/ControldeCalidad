@@ -4,6 +4,7 @@
 #include "frmIniciarProceso.h"
 #include "MantenimientoUsuarios.h"
 #include "MantLote.h"
+#include "VerProceso.h"
 
 namespace ControldeCalidadView{
 
@@ -48,6 +49,7 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: GestorLote^ objGestorLote;
 	private: Usuario^ usuario;
+	private:  VerProceso^ frmVerProceso;
 	private: System::Windows::Forms::ToolStripMenuItem^  mantenimientoToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  frutaToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  serialToolStripMenuItem;
@@ -185,15 +187,18 @@ namespace ControldeCalidadView{
 			// iniciarToolStripMenuItem
 			// 
 			this->iniciarToolStripMenuItem->Name = L"iniciarToolStripMenuItem";
-			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->iniciarToolStripMenuItem->Text = L"Iniciar";
 			this->iniciarToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::iniciarToolStripMenuItem_Click);
+			this->iniciarToolStripMenuItem->Enabled = true;
 			// 
 			// verProcesosToolStripMenuItem
 			// 
 			this->verProcesosToolStripMenuItem->Name = L"verProcesosToolStripMenuItem";
-			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->verProcesosToolStripMenuItem->Text = L"Ver Procesos";
+			this->verProcesosToolStripMenuItem->Enabled = false;
+			this->verProcesosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::verProcesosToolStripMenuItem_Click);
 			// 
 			// timer1
 			// 
@@ -241,9 +246,6 @@ namespace ControldeCalidadView{
 		}
 		this->lb_test->Text = "Recibir serial";
 		this->timer1->Interval = 10;
-		this->objGestorLote->Deserializar();
-		this->objGestorLote->ListaLote->Clear();
-		this->objGestorLote->Serializar();
 	}
 
 			 //cierra el puerto
@@ -268,10 +270,12 @@ namespace ControldeCalidadView{
 		ventanaserial->ShowDialog();
 	}
 	private: System::Void iniciarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->objGestorLote, this->usuario);
-		VentanaIniciar->MdiParent = this;
-		VentanaIniciar->Show();
-		this->iniciarToolStripMenuItem->Enabled = VentanaIniciar->procIniciado;
+		frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->usuario);
+		if (VentanaIniciar->ShowDialog() == System::Windows::Forms::DialogResult::OK){
+			this->iniciarToolStripMenuItem->Enabled = !VentanaIniciar->procIniciado;
+			this->frmVerProceso = gcnew VerProceso(this->timer1);
+			this->verProcesosToolStripMenuItem->Enabled = true;
+		}
 		this->timer1->Stop();
 	}
 	private: System::Void usuarioToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
@@ -287,5 +291,8 @@ namespace ControldeCalidadView{
 	private: System::Void frmPrincipal_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 		this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 	}
-	};
+	private: System::Void verProcesosToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		this->frmVerProceso->ShowDialog();
+	}
+};
 }

@@ -84,7 +84,7 @@ namespace ControldeCalidadView{
 			this->button1->Location = System::Drawing::Point(140, 311);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(107, 23);
-			this->button1->TabIndex = 0;
+			this->button1->TabIndex = 5;
 			this->button1->Text = L"Agregar nuevo";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MantenimientoUsuarios::button1_Click);
@@ -94,16 +94,17 @@ namespace ControldeCalidadView{
 			this->textBox1->Location = System::Drawing::Point(92, 68);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(204, 20);
-			this->textBox1->TabIndex = 1;
+			this->textBox1->TabIndex = 2;
 			// 
 			// button2
 			// 
 			this->button2->Location = System::Drawing::Point(302, 66);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 2;
+			this->button2->TabIndex = 3;
 			this->button2->Text = L"Buscar";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MantenimientoUsuarios::button2_Click);
 			// 
 			// dataGridView1
 			// 
@@ -162,12 +163,13 @@ namespace ControldeCalidadView{
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4){ L"Código", L"Nombres", L"Apellidos", L"Profesión" });
 			this->comboBox1->Location = System::Drawing::Point(92, 30);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(204, 21);
-			this->comboBox1->TabIndex = 3;
+			this->comboBox1->TabIndex = 1;
 			// 
 			// button3
 			// 
@@ -214,7 +216,7 @@ namespace ControldeCalidadView{
 			this->objGestorUsuarios->AgregarUsuario(VentanaNuevoUsuario->newUser);
 			MostrarGrilla();
 		}
-		
+
 	}
 	private: void MostrarGrilla(){
 		this->dataGridView1->Rows->Clear();
@@ -228,6 +230,28 @@ namespace ControldeCalidadView{
 			this->dataGridView1->Rows->Add(fila);
 		}
 	}
+	private: void MostrarGrilla(Usuario^ user){
+		this->dataGridView1->Rows->Clear();
+		array<String^>^ fila = gcnew array<String^>(4);
+		fila[0] = Convert::ToString(user->codigo);
+		fila[1] = user->nombres;
+		fila[2] = user->apellidos;
+		fila[3] = user->profesion;
+		this->dataGridView1->Rows->Add(fila);
+	}
+
+	private: void MostrarGrilla(List<Usuario^>^ ListaUsuarios){
+		this->dataGridView1->Rows->Clear();
+		for (int i = 0; i < ListaUsuarios->Count; i++){
+			array<String^>^ fila = gcnew array<String^>(4);
+			fila[0] = Convert::ToString(ListaUsuarios[i]->codigo);
+			fila[1] = ListaUsuarios[i]->nombres;
+			fila[2] = ListaUsuarios[i]->apellidos;
+			fila[3] = ListaUsuarios[i]->profesion;
+			this->dataGridView1->Rows->Add(fila);
+		}
+	}
+
 	private: System::Void MantenimientoUsuarios_Load(System::Object^  sender, System::EventArgs^  e){
 		this->objGestorUsuarios->Deserializar();
 		MostrarGrilla();
@@ -240,10 +264,41 @@ namespace ControldeCalidadView{
 		this->objGestorUsuarios->EliminarUsuarioxCodigo(Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedCells[0]->RowIndex]->Cells[0]->Value));
 		MostrarGrilla();
 	}
-private: System::Void dataGridView1_CellClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
-}
-private: System::Void dataGridView1_CellDoubleClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
-	this->dataGridView1->Rows[e->RowIndex]->Selected = true;
-}
-};
+	private: System::Void dataGridView1_CellClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
+	}
+	private: System::Void dataGridView1_CellDoubleClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
+		this->dataGridView1->Rows[e->RowIndex]->Selected = true;
+	}
+	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e){
+		if (this->comboBox1->Text == "Código"){
+			if (this->textBox1->Text == ""){
+				MostrarGrilla();
+			} else{
+
+				MostrarGrilla(this->objGestorUsuarios->ObtenerUsuarioxCodigo(Convert::ToInt32(this->textBox1->Text)));
+			}
+		} else if (this->comboBox1->Text == "Nombres"){
+			if (this->textBox1->Text == ""){
+				MostrarGrilla();
+			} else{
+
+				MostrarGrilla(this->objGestorUsuarios->ObtenerUsuarioxNombre(this->textBox1->Text));
+			}
+		} else if (this->comboBox1->Text == "Apellidos"){
+			if (this->textBox1->Text == ""){
+				MostrarGrilla();
+			} else{
+
+				MostrarGrilla(this->objGestorUsuarios->ObtenerUsuarioxApellidos(this->textBox1->Text));
+			}
+		} else if (this->comboBox1->Text == "Profesión"){
+			if (this->textBox1->Text == ""){
+				MostrarGrilla();
+			} else{
+
+				MostrarGrilla(this->objGestorUsuarios->ObtenerUsuarioxProfesion(this->textBox1->Text));
+			}
+		}
+	}
+	};
 }

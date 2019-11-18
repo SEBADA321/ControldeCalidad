@@ -145,6 +145,7 @@
     <ClCompile Include="NuevoLote.cpp" />
     <ClCompile Include="NuevoUsuario.cpp" />
     <ClCompile Include="VentanaSerial.cpp" />
+    <ClCompile Include="VerProceso.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="frmAgregarFruta.h">
@@ -181,6 +182,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="VentanaSerial.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="VerProceso.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VentanaSerial.resx">
       <DependentUpon>VentanaSerial.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerProceso.resx">
+      <DependentUpon>VerProceso.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

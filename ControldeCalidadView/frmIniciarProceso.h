@@ -24,9 +24,8 @@ namespace ControldeCalidadView{
 			//
 		}
 
-		frmIniciarProceso(GestorLote^ objGestorLote, Usuario^ usuario){
+		frmIniciarProceso(Usuario^ usuario){
 			InitializeComponent();
-			this->objGestorLote = objGestorLote;
 			this->usuario = usuario;
 		}
 
@@ -43,6 +42,7 @@ namespace ControldeCalidadView{
 	private: GestorLote^ objGestorLote;
 	public: bool procIniciado = false;//SALIDA
 	private: Usuario^ usuario;
+	public: Lote^ objLote;
 	private: System::Windows::Forms::Label^  label2;
 	public:
 	private: System::Windows::Forms::TextBox^  textBox1;
@@ -153,7 +153,7 @@ namespace ControldeCalidadView{
 			this->textBox6->Location = System::Drawing::Point(95, 127);
 			this->textBox6->Name = L"textBox6";
 			this->textBox6->ReadOnly = true;
-			this->textBox6->Size = System::Drawing::Size(100, 20);
+			this->textBox6->Size = System::Drawing::Size(169, 20);
 			this->textBox6->TabIndex = 9;
 			this->textBox6->TabStop = false;
 			// 
@@ -246,6 +246,7 @@ namespace ControldeCalidadView{
 			this->button1->TabIndex = 5;
 			this->button1->Text = L"Iniciar";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &frmIniciarProceso::button1_Click);
 			// 
 			// frmIniciarProceso
 			// 
@@ -272,6 +273,8 @@ namespace ControldeCalidadView{
 		}
 #pragma endregion
 	private: System::Void frmIniciarProceso_Load(System::Object^  sender, System::EventArgs^  e){
+		this->objGestorLote = gcnew GestorLote();
+		this->objGestorLote->Deserializar();
 		this->textBox1->Text = this->usuario->nombres;
 		this->comboBox1->Items->Clear();
 		List<Lote^>^ ListadeLotes = this->objGestorLote->ObtenerLotexEstadoLote("Sin procesar");
@@ -287,5 +290,15 @@ namespace ControldeCalidadView{
 		this->textBox5->Text = Convert::ToString(this->objGestorLote->ListaLote[this->comboBox1->SelectedIndex]->NroLote);
 		this->textBox6->Text = this->objGestorLote->ListaLote[this->comboBox1->SelectedIndex]->FechaProduccion;
 	}
-	};
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
+		if (this->comboBox1->SelectedIndex != -1){
+			this->objLote = this->objGestorLote->ObtenerLotexCodigo(Convert::ToInt32(this->textBox2->Text));
+			this->procIniciado = true;
+			this->Close();
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+		} else{
+			MessageBox::Show("Debe seleccionar un lote");
+		}
+	}
+};
 }

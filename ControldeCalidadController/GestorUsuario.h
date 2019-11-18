@@ -18,6 +18,8 @@ namespace ControldeCalidadController{
 		Usuario^ ObtenerUsuario(int index);
 		void EliminarUsuarioxCodigo(int id);
 		Usuario^ ObtenerUsuarioxNombre(String^ Nombre);
+		Usuario ^ ObtenerUsuarioxApellidos(String ^ apellido);
+		List<Usuario^>^ ObtenerUsuarioxProfesion(String ^ profesion);
 		Usuario ^ ObtenerUsuarioxCodigo(int codigo);
 		void Serializar();
 		void Deserializar();

@@ -47,6 +47,27 @@ Usuario^ GestorUsuario::ObtenerUsuarioxNombre(String^ Nombre){
 	return objUsuarioEncontrado;
 }
 
+Usuario^ GestorUsuario::ObtenerUsuarioxApellidos(String^ apellido){
+	Usuario^ objUsuarioEncontrado;
+	for (int i = 0; i < this->ListaUsuarios->Count; i++){
+		if (this->ListaUsuarios[i]->apellidos == apellido){
+			objUsuarioEncontrado = this->ListaUsuarios[i];
+			break;
+		}
+	}
+	return objUsuarioEncontrado;
+}
+
+List<Usuario^>^ GestorUsuario::ObtenerUsuarioxProfesion(String^ profesion){
+	List<Usuario^>^ listaUsuariosEncontrados = gcnew List<Usuario^>();
+	for (int i = 0; i < this->ListaUsuarios->Count; i++){
+		if (this->ListaUsuarios[i]->profesion == profesion){
+			listaUsuariosEncontrados->Add(this->ListaUsuarios[i]);
+		}
+	}
+	return listaUsuariosEncontrados;
+}
+
 Usuario^ GestorUsuario::ObtenerUsuarioxCodigo(int codigo){
 	Usuario^ objUsuarioEncontrado;
 	for (int i = 0; i < this->ListaUsuarios->Count; i++){

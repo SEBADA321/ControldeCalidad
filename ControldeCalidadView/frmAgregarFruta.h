@@ -5,6 +5,7 @@ namespace ControldeCalidadView{
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
@@ -34,7 +35,7 @@ namespace ControldeCalidadView{
 		}
 
 	private:
-	public: Fruta^ nfruta;
+	public: List<Fruta^>^ nfruta;
 	private: GestorFruta^objGestorFruta;
 	private: System::Windows::Forms::Button^  button1;
 	public:
@@ -49,6 +50,8 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::TextBox^  textBox4;
 	private: System::Windows::Forms::TextBox^  textBox5;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::TextBox^  textBox2;
 			 /// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -71,11 +74,13 @@ namespace ControldeCalidadView{
 				 this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 				 this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 				 this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+				 this->label6 = (gcnew System::Windows::Forms::Label());
+				 this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 				 this->SuspendLayout();
 				 // 
 				 // button1
 				 // 
-				 this->button1->Location = System::Drawing::Point(101, 168);
+				 this->button1->Location = System::Drawing::Point(101, 226);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(75, 23);
 				 this->button1->TabIndex = 0;
@@ -168,11 +173,32 @@ namespace ControldeCalidadView{
 				 this->comboBox1->Size = System::Drawing::Size(121, 21);
 				 this->comboBox1->TabIndex = 11;
 				 // 
+				 // label6
+				 // 
+				 this->label6->AutoSize = true;
+				 this->label6->Location = System::Drawing::Point(89, 191);
+				 this->label6->Name = L"label6";
+				 this->label6->Size = System::Drawing::Size(52, 13);
+				 this->label6->TabIndex = 12;
+				 this->label6->Text = L"Cantidad:";
+				 // 
+				 // textBox2
+				 // 
+				 this->textBox2->Location = System::Drawing::Point(147, 188);
+				 this->textBox2->Name = L"textBox2";
+				 this->textBox2->Size = System::Drawing::Size(41, 20);
+				 this->textBox2->TabIndex = 13;
+				 this->textBox2->Text = L"1";
+				 this->textBox2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+				 this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &frmAgregarFruta::textBox2_KeyPress);
+				 // 
 				 // frmAgregarFruta
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-				 this->ClientSize = System::Drawing::Size(276, 209);
+				 this->ClientSize = System::Drawing::Size(276, 261);
+				 this->Controls->Add(this->textBox2);
+				 this->Controls->Add(this->label6);
 				 this->Controls->Add(this->comboBox1);
 				 this->Controls->Add(this->textBox5);
 				 this->Controls->Add(this->textBox4);
@@ -197,7 +223,8 @@ namespace ControldeCalidadView{
 			 }
 #pragma endregion
 	private: System::Void frmAgregarFruta_Load(System::Object^  sender, System::EventArgs^  e){
-		this->nfruta = gcnew Fruta();
+		this->nfruta = gcnew List<Fruta^>();
+		this->nfruta->Clear();
 		this->objGestorFruta = gcnew GestorFruta();
 		this->objGestorFruta->Deserializar();
 		for (int i = 0; i < this->objGestorFruta->ListaFruta->Count; i++){
@@ -205,10 +232,16 @@ namespace ControldeCalidadView{
 		}
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		if (!(this->textBox1->Text == "" || this->comboBox1->SelectedIndex == -1)){
-			this->nfruta->codigo = Convert::ToInt32(this->textBox1->Text);
-			this->nfruta->nombre = this->comboBox1->Text;
-			this->nfruta->color = "";
+		if (!(this->textBox1->Text == "" || this->comboBox1->SelectedIndex == -1|| Convert::ToInt32(this->textBox2->Text) == 0)){
+			int codInc = Convert::ToInt32(this->textBox1->Text);
+			for (int i = 0; i < Convert::ToInt32(this->textBox2->Text); i++){
+				Fruta^ fruta = gcnew Fruta();
+				fruta->codigo = codInc;
+				fruta->nombre = this->comboBox1->Text;
+				fruta->color = "";
+				this->nfruta->Add(fruta);
+				codInc++;
+			}
 			this->Close();
 			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 		} else{
@@ -222,5 +255,10 @@ namespace ControldeCalidadView{
 			e->Handled = true;
 		}
 	}
-	};
+	private: System::Void textBox2_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
+		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
+			e->Handled = true;
+		}
+	}
+};
 }

@@ -94,7 +94,7 @@ namespace ControldeCalidadView{
 				 this->dataGridView1->Location = System::Drawing::Point(6, 19);
 				 this->dataGridView1->Name = L"dataGridView1";
 				 this->dataGridView1->Size = System::Drawing::Size(292, 218);
-				 this->dataGridView1->TabIndex = 0;
+				 this->dataGridView1->TabIndex = 5;
 				 // 
 				 // Column1
 				 // 
@@ -112,7 +112,7 @@ namespace ControldeCalidadView{
 				 this->button1->Location = System::Drawing::Point(304, 117);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(103, 23);
-				 this->button1->TabIndex = 1;
+				 this->button1->TabIndex = 6;
 				 this->button1->Text = L"Agregar fruta";
 				 this->button1->UseVisualStyleBackColor = true;
 				 this->button1->Click += gcnew System::EventHandler(this, &NuevoLote::button1_Click);
@@ -137,7 +137,7 @@ namespace ControldeCalidadView{
 				 this->button2->Location = System::Drawing::Point(182, 377);
 				 this->button2->Name = L"button2";
 				 this->button2->Size = System::Drawing::Size(75, 23);
-				 this->button2->TabIndex = 3;
+				 this->button2->TabIndex = 7;
 				 this->button2->Text = L"Guardar";
 				 this->button2->UseVisualStyleBackColor = true;
 				 this->button2->Click += gcnew System::EventHandler(this, &NuevoLote::button2_Click);
@@ -186,7 +186,7 @@ namespace ControldeCalidadView{
 				 this->textBox1->Location = System::Drawing::Point(142, 11);
 				 this->textBox1->Name = L"textBox1";
 				 this->textBox1->Size = System::Drawing::Size(121, 20);
-				 this->textBox1->TabIndex = 7;
+				 this->textBox1->TabIndex = 1;
 				 this->textBox1->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &NuevoLote::textBox1_KeyPress);
 				 // 
 				 // textBox3
@@ -197,7 +197,7 @@ namespace ControldeCalidadView{
 				 this->textBox3->Location = System::Drawing::Point(142, 64);
 				 this->textBox3->Name = L"textBox3";
 				 this->textBox3->Size = System::Drawing::Size(121, 20);
-				 this->textBox3->TabIndex = 9;
+				 this->textBox3->TabIndex = 3;
 				 this->textBox3->TextChanged += gcnew System::EventHandler(this, &NuevoLote::textBox3_TextChanged);
 				 this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &NuevoLote::textBox3_KeyPress);
 				 // 
@@ -206,12 +206,13 @@ namespace ControldeCalidadView{
 				 this->comboBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 																							   | System::Windows::Forms::AnchorStyles::Left)
 																							  | System::Windows::Forms::AnchorStyles::Right));
+				 this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 				 this->comboBox1->FormattingEnabled = true;
 				 this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2){ L"Sin procesar", L"Procesado" });
 				 this->comboBox1->Location = System::Drawing::Point(142, 37);
 				 this->comboBox1->Name = L"comboBox1";
 				 this->comboBox1->Size = System::Drawing::Size(121, 21);
-				 this->comboBox1->TabIndex = 10;
+				 this->comboBox1->TabIndex = 2;
 				 // 
 				 // dateTimePicker1
 				 // 
@@ -221,7 +222,7 @@ namespace ControldeCalidadView{
 				 this->dateTimePicker1->Location = System::Drawing::Point(142, 90);
 				 this->dateTimePicker1->Name = L"dateTimePicker1";
 				 this->dateTimePicker1->Size = System::Drawing::Size(200, 20);
-				 this->dateTimePicker1->TabIndex = 11;
+				 this->dateTimePicker1->TabIndex = 4;
 				 // 
 				 // label4
 				 // 
@@ -274,16 +275,24 @@ namespace ControldeCalidadView{
 		}
 	}
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e){
-		if (!(this->textBox1->Text == "" || this->textBox3->Text == "" || this->nLote->ListaFruta->Count > 0)){
+		if (!(this->textBox1->Text == "" || this->textBox3->Text == "" || this->nLote->ListaFruta->Count == 0)){
 			this->nLote->codigo = Convert::ToInt32(this->textBox1->Text);
 			this->nLote->NroLote = Convert::ToInt32(this->textBox3->Text);
+			this->nLote->EstadoLote = this->comboBox1->Text;
 			this->nLote->FechaProduccion = this->dateTimePicker1->Text;
+			this->Close();
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+		} else{
+			MessageBox::Show("Completar todos los campos");
 		}
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		frmAgregarFruta^ VentanaNuevaFruta = gcnew frmAgregarFruta();
 		if (VentanaNuevaFruta->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-			this->nLote->ListaFruta->Add(VentanaNuevaFruta->nfruta);
+			for (int i = 0; i < VentanaNuevaFruta->nfruta->Count; i++){
+				this->nLote->ListaFruta->Add(VentanaNuevaFruta->nfruta[i]);
+			}
+			
 			MostrarGrilla();
 		}
 	}
