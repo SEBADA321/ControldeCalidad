@@ -259,7 +259,7 @@ namespace ControldeCalidadView{
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e){
 		if (this->serialPort->BytesToRead > 0){
 			try{
-				this->lb_test->Text = this->serialPort->ReadLine();
+				this->frmVerProceso->Obtener_Serial(this->serialPort->ReadLine());
 			} catch (TimeoutException^){
 				this->lb_test->Text = "Error";
 			}
@@ -273,10 +273,10 @@ namespace ControldeCalidadView{
 		frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->usuario);
 		if (VentanaIniciar->ShowDialog() == System::Windows::Forms::DialogResult::OK){
 			this->iniciarToolStripMenuItem->Enabled = !VentanaIniciar->procIniciado;
-			this->frmVerProceso = gcnew VerProceso(this->timer1);
+			this->frmVerProceso = gcnew VerProceso(this->timer1, VentanaIniciar->objLote);
 			this->verProcesosToolStripMenuItem->Enabled = true;
+			this->timer1->Start();
 		}
-		this->timer1->Stop();
 	}
 	private: System::Void usuarioToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		MantenimientoUsuarios^ VentanaMantUsuarios = gcnew MantenimientoUsuarios();
@@ -292,7 +292,8 @@ namespace ControldeCalidadView{
 		this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 	}
 	private: System::Void verProcesosToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		this->frmVerProceso->ShowDialog();
+		this->frmVerProceso->MdiParent = this;
+		this->frmVerProceso->Show();
 	}
 };
 }

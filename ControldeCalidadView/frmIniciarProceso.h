@@ -122,6 +122,7 @@ namespace ControldeCalidadView{
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Location = System::Drawing::Point(144, 75);
 			this->comboBox1->Name = L"comboBox1";
@@ -263,6 +264,7 @@ namespace ControldeCalidadView{
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"frmIniciarProceso";
 			this->ShowInTaskbar = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Iniciar proceso";
 			this->Load += gcnew System::EventHandler(this, &frmIniciarProceso::frmIniciarProceso_Load);
 			this->groupBox1->ResumeLayout(false);
