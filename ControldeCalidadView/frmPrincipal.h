@@ -64,6 +64,8 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::ToolStripMenuItem^  procesosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  iniciarToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  verProcesosToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  cerrarToolStripMenuItem;
+
 	private: System::ComponentModel::IContainer^  components;
 	protected:
 
@@ -87,6 +89,7 @@ namespace ControldeCalidadView{
 			this->usuarioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->sistemaFajaDistribuidoraToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->produccionToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->cerrarToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->serialToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->configurarPuertoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cerrarPuertoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -113,9 +116,9 @@ namespace ControldeCalidadView{
 			// 
 			// mantenimientoToolStripMenuItem
 			// 
-			this->mantenimientoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4){
+			this->mantenimientoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5){
 				this->frutaToolStripMenuItem,
-					this->usuarioToolStripMenuItem, this->sistemaFajaDistribuidoraToolStripMenuItem, this->produccionToolStripMenuItem
+					this->usuarioToolStripMenuItem, this->sistemaFajaDistribuidoraToolStripMenuItem, this->produccionToolStripMenuItem, this->cerrarToolStripMenuItem
 			});
 			this->mantenimientoToolStripMenuItem->Name = L"mantenimientoToolStripMenuItem";
 			this->mantenimientoToolStripMenuItem->Size = System::Drawing::Size(101, 20);
@@ -148,6 +151,13 @@ namespace ControldeCalidadView{
 			this->produccionToolStripMenuItem->Size = System::Drawing::Size(204, 22);
 			this->produccionToolStripMenuItem->Text = L"Lote";
 			this->produccionToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::produccionToolStripMenuItem_Click);
+			// 
+			// cerrarToolStripMenuItem
+			// 
+			this->cerrarToolStripMenuItem->Name = L"cerrarToolStripMenuItem";
+			this->cerrarToolStripMenuItem->Size = System::Drawing::Size(204, 22);
+			this->cerrarToolStripMenuItem->Text = L"Cerrar";
+			this->cerrarToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::cerrarToolStripMenuItem_Click);
 			// 
 			// serialToolStripMenuItem
 			// 
@@ -187,17 +197,16 @@ namespace ControldeCalidadView{
 			// iniciarToolStripMenuItem
 			// 
 			this->iniciarToolStripMenuItem->Name = L"iniciarToolStripMenuItem";
-			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->iniciarToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->iniciarToolStripMenuItem->Text = L"Iniciar";
 			this->iniciarToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::iniciarToolStripMenuItem_Click);
-			this->iniciarToolStripMenuItem->Enabled = true;
 			// 
 			// verProcesosToolStripMenuItem
 			// 
-			this->verProcesosToolStripMenuItem->Name = L"verProcesosToolStripMenuItem";
-			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->verProcesosToolStripMenuItem->Text = L"Ver Procesos";
 			this->verProcesosToolStripMenuItem->Enabled = false;
+			this->verProcesosToolStripMenuItem->Name = L"verProcesosToolStripMenuItem";
+			this->verProcesosToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->verProcesosToolStripMenuItem->Text = L"Ver Procesos";
 			this->verProcesosToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::verProcesosToolStripMenuItem_Click);
 			// 
 			// timer1
@@ -226,7 +235,6 @@ namespace ControldeCalidadView{
 			this->Name = L"frmPrincipal";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L" Sistema control de calidad PUCP";
-			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmPrincipal::frmPrincipal_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &frmPrincipal::VentanaP_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -270,13 +278,21 @@ namespace ControldeCalidadView{
 		ventanaserial->ShowDialog();
 	}
 	private: System::Void iniciarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->usuario);
-		if (VentanaIniciar->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-			this->iniciarToolStripMenuItem->Enabled = !VentanaIniciar->procIniciado;
-			this->frmVerProceso = gcnew VerProceso(this->timer1, VentanaIniciar->objLote);
-			this->verProcesosToolStripMenuItem->Enabled = true;
-			this->timer1->Start();
+		if (this->serialPort->IsOpen){
+			frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->usuario);
+			if (VentanaIniciar->ShowDialog() == System::Windows::Forms::DialogResult::OK){
+				this->iniciarToolStripMenuItem->Enabled = !VentanaIniciar->procIniciado;
+				this->frmVerProceso = gcnew VerProceso(this->timer1, VentanaIniciar->objLote);
+				this->frmVerProceso->MdiParent = this;
+				this->verProcesosToolStripMenuItem->Enabled = true;
+				this->timer1->Start();
+			}
+		} else{
+			MessageBox::Show("Debe abrir un puerto primero");
+			VentanaSerial^ ventanaserial = gcnew VentanaSerial(this->serialPort, this->cerrarPuertoToolStripMenuItem, this->timer1);
+			ventanaserial->ShowDialog();
 		}
+		
 	}
 	private: System::Void usuarioToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		MantenimientoUsuarios^ VentanaMantUsuarios = gcnew MantenimientoUsuarios();
@@ -288,12 +304,12 @@ namespace ControldeCalidadView{
 		VentanaMantLote->MdiParent = this;
 		VentanaMantLote->Show();
 	}
-	private: System::Void frmPrincipal_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
-		this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-	}
 	private: System::Void verProcesosToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		this->frmVerProceso->MdiParent = this;
 		this->frmVerProceso->Show();
 	}
-};
+	private: System::Void cerrarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		MessageBox::Show("Confirmar cerrar");
+		this->DialogResult = System::Windows::Forms::DialogResult::No;
+	}
+	};
 }

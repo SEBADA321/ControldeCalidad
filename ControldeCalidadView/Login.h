@@ -37,16 +37,19 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::Label^  label1;
 	private: GestorUsuario^ objGestorUsuario;
 	protected:
+	private: frmPrincipal^ ventanaPrincipal;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Button^  button1;
 
+	private: System::ComponentModel::IContainer^  components;
+
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -123,7 +126,6 @@ namespace ControldeCalidadView{
 			this->Load += gcnew System::EventHandler(this, &Login::Login_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 #pragma endregion
 	private: System::Void Login_Load(System::Object^  sender, System::EventArgs^  e){
@@ -141,19 +143,18 @@ namespace ControldeCalidadView{
 			}
 		}
 		if (correcto){
-			frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal(this->objGestorUsuario->ListaUsuarios[j]);
+			this->ventanaPrincipal = gcnew frmPrincipal(this->objGestorUsuario->ListaUsuarios[j]);
 			this->Hide();
-			if (ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::Cancel){
+			if (this->ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::No){
 				this->Close();
 			}
 		} else if (this->textBox1->Text == "admin" && this->textBox2->Text == "admin"){
-			frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal();
-			ventanaPrincipal->admin = true;
+			this->ventanaPrincipal = gcnew frmPrincipal();
+			this->ventanaPrincipal->admin = true;
 			this->Hide();
-			if (ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::Cancel){
+			if (this->ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::No){
 				this->Close();
 			}
-
 		} else{
 			MessageBox::Show("El usuario y/o contraseña no es correcto");
 		}

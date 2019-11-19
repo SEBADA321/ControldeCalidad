@@ -27,6 +27,7 @@ namespace ControldeCalidadView{
 			InitializeComponent();
 			this->timer1 = timer1;
 			this->lote_proc = lote_proc;
+			this->frutas_proc_prev = 0;
 		}
 
 	protected:
@@ -52,7 +53,14 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::TextBox^  textBox3;
 	private: int frutas_proc;
+	private: int frutas_proc_prev;
 	private: int frutas_descartadas;
+	private: System::Windows::Forms::TextBox^  tb_estado;
+
+	private: System::Windows::Forms::TextBox^  tb_nro_lote;
+
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label5;
 	public:
 	protected:
 	private: System::ComponentModel::IContainer^  components;
@@ -82,6 +90,10 @@ namespace ControldeCalidadView{
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->tb_nro_lote = (gcnew System::Windows::Forms::TextBox());
+			this->tb_estado = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
@@ -89,7 +101,7 @@ namespace ControldeCalidadView{
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(18, 36);
+			this->label1->Location = System::Drawing::Point(18, 34);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(97, 13);
 			this->label1->TabIndex = 0;
@@ -98,7 +110,7 @@ namespace ControldeCalidadView{
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(45, 77);
+			this->label2->Location = System::Drawing::Point(45, 59);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(70, 13);
 			this->label2->TabIndex = 1;
@@ -106,7 +118,7 @@ namespace ControldeCalidadView{
 			// 
 			// progressBar1
 			// 
-			this->progressBar1->Location = System::Drawing::Point(205, 31);
+			this->progressBar1->Location = System::Drawing::Point(171, 29);
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(150, 23);
 			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
@@ -114,18 +126,22 @@ namespace ControldeCalidadView{
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->tb_estado);
+			this->groupBox1->Controls->Add(this->tb_nro_lote);
+			this->groupBox1->Controls->Add(this->label6);
+			this->groupBox1->Controls->Add(this->label5);
 			this->groupBox1->Controls->Add(this->textBox2);
 			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Location = System::Drawing::Point(15, 23);
+			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(422, 171);
+			this->groupBox1->Size = System::Drawing::Size(456, 182);
 			this->groupBox1->TabIndex = 3;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Lote";
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(121, 128);
+			this->textBox2->Location = System::Drawing::Point(121, 93);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(100, 20);
@@ -135,7 +151,7 @@ namespace ControldeCalidadView{
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(64, 131);
+			this->label3->Location = System::Drawing::Point(61, 96);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(54, 13);
 			this->label3->TabIndex = 0;
@@ -149,16 +165,16 @@ namespace ControldeCalidadView{
 			this->groupBox2->Controls->Add(this->progressBar1);
 			this->groupBox2->Controls->Add(this->label2);
 			this->groupBox2->Controls->Add(this->label1);
-			this->groupBox2->Location = System::Drawing::Point(15, 212);
+			this->groupBox2->Location = System::Drawing::Point(12, 200);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(437, 205);
+			this->groupBox2->Size = System::Drawing::Size(456, 221);
 			this->groupBox2->TabIndex = 4;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Información frutas";
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(121, 74);
+			this->textBox3->Location = System::Drawing::Point(121, 56);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(44, 20);
@@ -168,7 +184,7 @@ namespace ControldeCalidadView{
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(361, 36);
+			this->label4->Location = System::Drawing::Point(327, 34);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(24, 13);
 			this->label4->TabIndex = 4;
@@ -176,13 +192,48 @@ namespace ControldeCalidadView{
 			// 
 			// textBox1
 			// 
-			this->textBox1->CausesValidation = false;
-			this->textBox1->Location = System::Drawing::Point(121, 32);
+			this->textBox1->Location = System::Drawing::Point(121, 30);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ReadOnly = true;
 			this->textBox1->Size = System::Drawing::Size(44, 20);
 			this->textBox1->TabIndex = 3;
 			this->textBox1->TabStop = false;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(69, 44);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(46, 13);
+			this->label5->TabIndex = 2;
+			this->label5->Text = L"N° Lote:";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(72, 70);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(43, 13);
+			this->label6->TabIndex = 3;
+			this->label6->Text = L"Estado:";
+			// 
+			// tb_nro_lote
+			// 
+			this->tb_nro_lote->Location = System::Drawing::Point(121, 41);
+			this->tb_nro_lote->Name = L"tb_nro_lote";
+			this->tb_nro_lote->ReadOnly = true;
+			this->tb_nro_lote->Size = System::Drawing::Size(100, 20);
+			this->tb_nro_lote->TabIndex = 4;
+			this->tb_nro_lote->TabStop = false;
+			// 
+			// tb_estado
+			// 
+			this->tb_estado->Location = System::Drawing::Point(121, 67);
+			this->tb_estado->Name = L"tb_estado";
+			this->tb_estado->ReadOnly = true;
+			this->tb_estado->Size = System::Drawing::Size(100, 20);
+			this->tb_estado->TabIndex = 5;
+			this->tb_estado->TabStop = false;
 			// 
 			// VerProceso
 			// 
@@ -218,21 +269,30 @@ namespace ControldeCalidadView{
 		this->textBox2->Text = Convert::ToString(this->lote_proc->ListaFruta->Count);
 		this->progressBar1->Maximum = this->lote_proc->ListaFruta->Count;
 		this->label4->Text = "";
+		this->tb_nro_lote->Text = Convert::ToString(this->lote_proc->NroLote);
+		this->tb_estado->Text = this->lote_proc->EstadoLote;
 	}
 	private: System::Void ActualizarBarra(){
-		this->progressBar1->Value = this->frutas_proc;
-		this->label4->Text = (Convert::ToDouble(this->progressBar1->Value)*100 / Convert::ToDouble(this->progressBar1->Maximum)).ToString("F1")+"%";
+		if ((this->frutas_proc > this->frutas_proc_prev)&&(this->frutas_proc <= this->lote_proc->ListaFruta->Count)){
+			this->progressBar1->Value = this->frutas_proc;
+			this->progressBar1->Invalidate();
+			this->frutas_proc_prev = this->frutas_proc;
+		}
 	}
 
 	public: System::Void Obtener_Serial(String^ serial_rec){
 		this->DecodificarSerial(serial_rec);
+		this->ActualizarBarra();
 		this->textBox1->Text = Convert::ToString(this->frutas_proc);
 		this->textBox3->Text = Convert::ToString(this->frutas_descartadas);
-		this->ActualizarBarra();
+		this->label4->Text = (Convert::ToDouble(this->progressBar1->Value) * 100 / Convert::ToDouble(this->progressBar1->Maximum)).ToString("F1") + "%";
+		if (this->frutas_proc == this->lote_proc->ListaFruta->Count){
+			this->tb_estado->Text = "Procesado";
+		}
 	}
 	private: System::Void VerProceso_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e){
 		this->Hide();
 		e->Cancel = true;
 	}
-};
+	};
 }
