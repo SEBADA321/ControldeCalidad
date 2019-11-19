@@ -55,12 +55,19 @@ namespace ControldeCalidadView{
 	private: int frutas_proc;
 	private: int frutas_proc_prev;
 	private: int frutas_descartadas;
+	private: double frutas_tamano_prom;
+	private: double frutas_tamano;
+	private: int contador;
 	private: System::Windows::Forms::TextBox^  tb_estado;
 
 	private: System::Windows::Forms::TextBox^  tb_nro_lote;
 
 	private: System::Windows::Forms::Label^  label6;
 	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::TextBox^  textBox4;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::TextBox^  textBox5;
+	private: System::Windows::Forms::Label^  label8;
 	public:
 	protected:
 	private: System::ComponentModel::IContainer^  components;
@@ -84,16 +91,20 @@ namespace ControldeCalidadView{
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->tb_estado = (gcnew System::Windows::Forms::TextBox());
+			this->tb_nro_lote = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->tb_nro_lote = (gcnew System::Windows::Forms::TextBox());
-			this->tb_estado = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->SuspendLayout();
@@ -126,6 +137,8 @@ namespace ControldeCalidadView{
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->textBox4);
+			this->groupBox1->Controls->Add(this->label7);
 			this->groupBox1->Controls->Add(this->tb_estado);
 			this->groupBox1->Controls->Add(this->tb_nro_lote);
 			this->groupBox1->Controls->Add(this->label6);
@@ -139,9 +152,63 @@ namespace ControldeCalidadView{
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Datos Lote";
 			// 
+			// textBox4
+			// 
+			this->textBox4->Location = System::Drawing::Point(112, 30);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->ReadOnly = true;
+			this->textBox4->Size = System::Drawing::Size(100, 20);
+			this->textBox4->TabIndex = 7;
+			this->textBox4->TabStop = false;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(60, 33);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(46, 13);
+			this->label7->TabIndex = 6;
+			this->label7->Text = L"Usuario:";
+			// 
+			// tb_estado
+			// 
+			this->tb_estado->Location = System::Drawing::Point(112, 82);
+			this->tb_estado->Name = L"tb_estado";
+			this->tb_estado->ReadOnly = true;
+			this->tb_estado->Size = System::Drawing::Size(100, 20);
+			this->tb_estado->TabIndex = 5;
+			this->tb_estado->TabStop = false;
+			// 
+			// tb_nro_lote
+			// 
+			this->tb_nro_lote->Location = System::Drawing::Point(112, 56);
+			this->tb_nro_lote->Name = L"tb_nro_lote";
+			this->tb_nro_lote->ReadOnly = true;
+			this->tb_nro_lote->Size = System::Drawing::Size(100, 20);
+			this->tb_nro_lote->TabIndex = 4;
+			this->tb_nro_lote->TabStop = false;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(63, 85);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(43, 13);
+			this->label6->TabIndex = 3;
+			this->label6->Text = L"Estado:";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(60, 59);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(46, 13);
+			this->label5->TabIndex = 2;
+			this->label5->Text = L"N° Lote:";
+			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(121, 93);
+			this->textBox2->Location = System::Drawing::Point(112, 108);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(100, 20);
@@ -151,7 +218,7 @@ namespace ControldeCalidadView{
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(61, 96);
+			this->label3->Location = System::Drawing::Point(52, 111);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(54, 13);
 			this->label3->TabIndex = 0;
@@ -159,6 +226,8 @@ namespace ControldeCalidadView{
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->textBox5);
+			this->groupBox2->Controls->Add(this->label8);
 			this->groupBox2->Controls->Add(this->textBox3);
 			this->groupBox2->Controls->Add(this->label4);
 			this->groupBox2->Controls->Add(this->textBox1);
@@ -199,41 +268,23 @@ namespace ControldeCalidadView{
 			this->textBox1->TabIndex = 3;
 			this->textBox1->TabStop = false;
 			// 
-			// label5
+			// label8
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(69, 44);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(46, 13);
-			this->label5->TabIndex = 2;
-			this->label5->Text = L"N° Lote:";
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(19, 85);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(96, 13);
+			this->label8->TabIndex = 6;
+			this->label8->Text = L"Tamaño Promedio:";
 			// 
-			// label6
+			// textBox5
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(72, 70);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(43, 13);
-			this->label6->TabIndex = 3;
-			this->label6->Text = L"Estado:";
-			// 
-			// tb_nro_lote
-			// 
-			this->tb_nro_lote->Location = System::Drawing::Point(121, 41);
-			this->tb_nro_lote->Name = L"tb_nro_lote";
-			this->tb_nro_lote->ReadOnly = true;
-			this->tb_nro_lote->Size = System::Drawing::Size(100, 20);
-			this->tb_nro_lote->TabIndex = 4;
-			this->tb_nro_lote->TabStop = false;
-			// 
-			// tb_estado
-			// 
-			this->tb_estado->Location = System::Drawing::Point(121, 67);
-			this->tb_estado->Name = L"tb_estado";
-			this->tb_estado->ReadOnly = true;
-			this->tb_estado->Size = System::Drawing::Size(100, 20);
-			this->tb_estado->TabIndex = 5;
-			this->tb_estado->TabStop = false;
+			this->textBox5->Location = System::Drawing::Point(121, 82);
+			this->textBox5->Name = L"textBox5";
+			this->textBox5->ReadOnly = true;
+			this->textBox5->Size = System::Drawing::Size(44, 20);
+			this->textBox5->TabIndex = 7;
+			this->textBox5->TabStop = false;
 			// 
 			// VerProceso
 			// 
@@ -262,6 +313,7 @@ namespace ControldeCalidadView{
 		this->data_serial = serial_rec;
 		this->frutas_proc = Convert::ToInt32(serial_rec);
 		this->frutas_descartadas = 0;
+		this->frutas_tamano = 15.0;
 	}
 	private: System::Void VerProceso_Load(System::Object^  sender, System::EventArgs^  e){
 		this->timer1->Start();
@@ -271,16 +323,19 @@ namespace ControldeCalidadView{
 		this->label4->Text = "";
 		this->tb_nro_lote->Text = Convert::ToString(this->lote_proc->NroLote);
 		this->tb_estado->Text = this->lote_proc->EstadoLote;
+		this->textBox4->Text = this->lote_proc->usuario->nombres;
+		this->frutas_tamano_prom = 0;
+		this->contador = 1;
 	}
 	private: System::Void ActualizarBarra(){
-		if ((this->frutas_proc > this->frutas_proc_prev)&&(this->frutas_proc <= this->lote_proc->ListaFruta->Count)){
+		if ((this->frutas_proc > this->frutas_proc_prev) && (this->frutas_proc <= this->lote_proc->ListaFruta->Count)){
 			this->progressBar1->Value = this->frutas_proc;
 			this->progressBar1->Invalidate();
 			this->frutas_proc_prev = this->frutas_proc;
 		}
 	}
 
-	public: System::Void Obtener_Serial(String^ serial_rec){
+	public: int Obtener_Serial(String^ serial_rec){
 		this->DecodificarSerial(serial_rec);
 		this->ActualizarBarra();
 		this->textBox1->Text = Convert::ToString(this->frutas_proc);
@@ -289,6 +344,10 @@ namespace ControldeCalidadView{
 		if (this->frutas_proc == this->lote_proc->ListaFruta->Count){
 			this->tb_estado->Text = "Procesado";
 		}
+		this->frutas_tamano_prom = ((this->frutas_tamano_prom*(Convert::ToDouble(this->contador - 1)) + this->frutas_tamano) / Convert::ToDouble(this->contador));
+		this->textBox5->Text = frutas_tamano_prom.ToString("F1");
+		this->contador++;
+		return this->frutas_proc;
 	}
 	private: System::Void VerProceso_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e){
 		this->Hide();

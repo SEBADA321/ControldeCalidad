@@ -295,6 +295,7 @@ namespace ControldeCalidadView{
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		if (this->comboBox1->SelectedIndex != -1){
 			this->objLote = this->objGestorLote->ObtenerLotexCodigo(Convert::ToInt32(this->textBox2->Text));
+			this->objLote->usuario = this->usuario;
 			this->procIniciado = true;
 			this->Close();
 			this->DialogResult = System::Windows::Forms::DialogResult::OK;

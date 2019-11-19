@@ -66,6 +66,10 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::ToolStripMenuItem^  verProcesosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  cerrarToolStripMenuItem;
 
+	private: System::Windows::Forms::ToolStripProgressBar^  toolStripProgressBar1;
+	private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
+	private: System::Windows::Forms::StatusStrip^  statusStrip1;
+
 	private: System::ComponentModel::IContainer^  components;
 	protected:
 
@@ -99,7 +103,11 @@ namespace ControldeCalidadView{
 			this->serialPort = (gcnew System::IO::Ports::SerialPort(this->components));
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->lb_test = (gcnew System::Windows::Forms::Label());
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->toolStripProgressBar1 = (gcnew System::Windows::Forms::ToolStripProgressBar());
+			this->toolStripStatusLabel1 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->menuStrip1->SuspendLayout();
+			this->statusStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -222,22 +230,52 @@ namespace ControldeCalidadView{
 			this->lb_test->TabIndex = 2;
 			this->lb_test->Text = L"label1";
 			// 
+			// statusStrip1
+			// 
+			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2){
+				this->toolStripProgressBar1,
+					this->toolStripStatusLabel1
+			});
+			this->statusStrip1->Location = System::Drawing::Point(0, 518);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
+			this->statusStrip1->Size = System::Drawing::Size(819, 22);
+			this->statusStrip1->Stretch = false;
+			this->statusStrip1->TabIndex = 4;
+			this->statusStrip1->Text = L"statusStrip1";
+			// 
+			// toolStripProgressBar1
+			// 
+			this->toolStripProgressBar1->Name = L"toolStripProgressBar1";
+			this->toolStripProgressBar1->Size = System::Drawing::Size(100, 16);
+			// 
+			// toolStripStatusLabel1
+			// 
+			this->toolStripStatusLabel1->Name = L"toolStripStatusLabel1";
+			this->toolStripStatusLabel1->Size = System::Drawing::Size(118, 17);
+			this->toolStripStatusLabel1->Text = L"toolStripStatusLabel1";
+			// 
 			// frmPrincipal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(819, 540);
+			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->lb_test);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"frmPrincipal";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L" Sistema control de calidad PUCP";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &frmPrincipal::frmPrincipal_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &frmPrincipal::VentanaP_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->statusStrip1->ResumeLayout(false);
+			this->statusStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -254,6 +292,9 @@ namespace ControldeCalidadView{
 		}
 		this->lb_test->Text = "Recibir serial";
 		this->timer1->Interval = 10;
+		this->toolStripProgressBar1->Visible = false;
+		this->toolStripStatusLabel1->Visible = false;
+		this->toolStripStatusLabel1->Text = "";
 	}
 
 			 //cierra el puerto
@@ -267,7 +308,8 @@ namespace ControldeCalidadView{
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e){
 		if (this->serialPort->BytesToRead > 0){
 			try{
-				this->frmVerProceso->Obtener_Serial(this->serialPort->ReadLine());
+				this->toolStripProgressBar1->Value = this->frmVerProceso->Obtener_Serial(this->serialPort->ReadLine());
+				this->toolStripStatusLabel1->Text = (Convert::ToDouble(this->toolStripProgressBar1->Value) * 100 / Convert::ToDouble(this->toolStripProgressBar1->Maximum)).ToString("F1") + "%";
 			} catch (TimeoutException^){
 				this->lb_test->Text = "Error";
 			}
@@ -286,13 +328,18 @@ namespace ControldeCalidadView{
 				this->frmVerProceso->MdiParent = this;
 				this->verProcesosToolStripMenuItem->Enabled = true;
 				this->timer1->Start();
+				this->toolStripProgressBar1->Maximum = VentanaIniciar->objLote->ListaFruta->Count;
+				this->toolStripProgressBar1->Visible = true;
+				this->toolStripStatusLabel1->Visible = true;
+				this->toolStripStatusLabel1->Text = "0%";
 			}
 		} else{
-			MessageBox::Show("Debe abrir un puerto primero");
-			VentanaSerial^ ventanaserial = gcnew VentanaSerial(this->serialPort, this->cerrarPuertoToolStripMenuItem, this->timer1);
-			ventanaserial->ShowDialog();
+			System::Windows::Forms::DialogResult r = MessageBox::Show("Debe abrir un puerto primero","Aviso", System::Windows::Forms::MessageBoxButtons::YesNo);
+			if (r == System::Windows::Forms::DialogResult::Yes){
+				VentanaSerial^ ventanaserial = gcnew VentanaSerial(this->serialPort, this->cerrarPuertoToolStripMenuItem, this->timer1);
+				ventanaserial->ShowDialog();
+			}
 		}
-		
 	}
 	private: System::Void usuarioToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		MantenimientoUsuarios^ VentanaMantUsuarios = gcnew MantenimientoUsuarios();
@@ -308,7 +355,12 @@ namespace ControldeCalidadView{
 		this->frmVerProceso->Show();
 	}
 	private: System::Void cerrarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		MessageBox::Show("Confirmar cerrar");
+		System::Windows::Forms::DialogResult r = MessageBox::Show("Confirmar cerrar", "Aviso", System::Windows::Forms::MessageBoxButtons::YesNo);
+		if (r == System::Windows::Forms::DialogResult::Yes){
+			this->Close();
+		}
+	}
+	private: System::Void frmPrincipal_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e){
 		this->DialogResult = System::Windows::Forms::DialogResult::No;
 	}
 	};
