@@ -310,8 +310,13 @@ namespace ControldeCalidadView{
 			try{
 				this->toolStripProgressBar1->Value = this->frmVerProceso->Obtener_Serial(this->serialPort->ReadLine());
 				this->toolStripStatusLabel1->Text = (Convert::ToDouble(this->toolStripProgressBar1->Value) * 100 / Convert::ToDouble(this->toolStripProgressBar1->Maximum)).ToString("F1") + "%";
+				
+				if (this->timer1->Enabled){
+					this->lb_test->Text = "Funcionando";
+				} else{
+					this->lb_test->Text = "No funcionando";
+				}
 			} catch (TimeoutException^){
-				this->lb_test->Text = "Error";
 			}
 		}
 	}
@@ -334,7 +339,7 @@ namespace ControldeCalidadView{
 				this->toolStripStatusLabel1->Text = "0%";
 			}
 		} else{
-			System::Windows::Forms::DialogResult r = MessageBox::Show("Debe abrir un puerto primero","Aviso", System::Windows::Forms::MessageBoxButtons::YesNo);
+			System::Windows::Forms::DialogResult r = MessageBox::Show("Debe abrir un puerto primero", "Aviso", System::Windows::Forms::MessageBoxButtons::YesNo);
 			if (r == System::Windows::Forms::DialogResult::Yes){
 				VentanaSerial^ ventanaserial = gcnew VentanaSerial(this->serialPort, this->cerrarPuertoToolStripMenuItem, this->timer1);
 				ventanaserial->ShowDialog();

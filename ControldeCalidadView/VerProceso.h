@@ -44,6 +44,8 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::Label^  label2;
 	private: String^ data_serial;
 	private: Lote^ lote_proc;
+	private: String^ fruta_estado;
+	private: String^ fruta_color;
 	private: System::Windows::Forms::ProgressBar^  progressBar1;
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	private: System::Windows::Forms::GroupBox^  groupBox2;
@@ -309,11 +311,43 @@ namespace ControldeCalidadView{
 
 		}
 #pragma endregion
-	private: System::Void DecodificarSerial(String^ serial_rec){
+		/*	
+		Se separa en partes utiles para asignar a los atributos del lote y sus frutas.
+		Tambien se usará para monitorear los sensores
+		*/
+	private: System::Void DecodificarSerial(String^ serial_rec){//
 		this->data_serial = serial_rec;
 		this->frutas_proc = Convert::ToInt32(serial_rec);
 		this->frutas_descartadas = 0;
 		this->frutas_tamano = 15.0;
+		this->fruta_estado = "";
+		this->fruta_color = "";
+	}
+		/*
+		Función publica usada desde frmPrincipal para obtener datos del puerto serial
+		*/
+	public: int Obtener_Serial(String^ serial_rec){
+		this->DecodificarSerial(serial_rec);
+		this->ActualizarBarra();
+		this->textBox1->Text = Convert::ToString(this->frutas_proc);
+		this->textBox3->Text = Convert::ToString(this->frutas_descartadas);
+		if (this->frutas_proc <= this->lote_proc->ListaFruta->Count && this->frutas_proc >= 1){
+			this->lote_proc->ListaFruta[this->frutas_proc - 1]->estado = this->fruta_estado;
+			this->lote_proc->ListaFruta[this->frutas_proc - 1]->tamaño = Convert::ToInt32(this->frutas_tamano);
+			this->lote_proc->ListaFruta[this->frutas_proc - 1]->color = this->fruta_color;
+		}
+		this->label4->Text = (Convert::ToDouble(this->progressBar1->Value) * 100 / Convert::ToDouble(this->progressBar1->Maximum)).ToString("F1") + "%";
+		if (this->frutas_proc == this->lote_proc->ListaFruta->Count){
+			this->tb_estado->Text = "Procesado";
+			this->timer1->Stop();
+			this->lote_proc->EstadoLote = this->tb_estado->Text;
+			this->lote_proc->NroFrutasNoPodridas = this->frutas_proc - this->frutas_descartadas;
+			this->lote_proc->NroFrutasPodridas = this->frutas_descartadas;
+		}
+		this->frutas_tamano_prom = ((this->frutas_tamano_prom*(Convert::ToDouble(this->contador - 1)) + this->frutas_tamano) / Convert::ToDouble(this->contador));
+		this->textBox5->Text = frutas_tamano_prom.ToString("F1");
+		this->contador++;
+		return this->frutas_proc;
 	}
 	private: System::Void VerProceso_Load(System::Object^  sender, System::EventArgs^  e){
 		this->timer1->Start();
@@ -330,24 +364,8 @@ namespace ControldeCalidadView{
 	private: System::Void ActualizarBarra(){
 		if ((this->frutas_proc > this->frutas_proc_prev) && (this->frutas_proc <= this->lote_proc->ListaFruta->Count)){
 			this->progressBar1->Value = this->frutas_proc;
-			this->progressBar1->Invalidate();
 			this->frutas_proc_prev = this->frutas_proc;
 		}
-	}
-
-	public: int Obtener_Serial(String^ serial_rec){
-		this->DecodificarSerial(serial_rec);
-		this->ActualizarBarra();
-		this->textBox1->Text = Convert::ToString(this->frutas_proc);
-		this->textBox3->Text = Convert::ToString(this->frutas_descartadas);
-		this->label4->Text = (Convert::ToDouble(this->progressBar1->Value) * 100 / Convert::ToDouble(this->progressBar1->Maximum)).ToString("F1") + "%";
-		if (this->frutas_proc == this->lote_proc->ListaFruta->Count){
-			this->tb_estado->Text = "Procesado";
-		}
-		this->frutas_tamano_prom = ((this->frutas_tamano_prom*(Convert::ToDouble(this->contador - 1)) + this->frutas_tamano) / Convert::ToDouble(this->contador));
-		this->textBox5->Text = frutas_tamano_prom.ToString("F1");
-		this->contador++;
-		return this->frutas_proc;
 	}
 	private: System::Void VerProceso_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e){
 		this->Hide();
