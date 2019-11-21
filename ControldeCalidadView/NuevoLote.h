@@ -11,7 +11,6 @@ namespace ControldeCalidadView{
 	using namespace System::Drawing;
 	using namespace ControlCalidadModel;
 	using namespace ControldeCalidadController;
-
 	/// <summary>
 	/// Summary for NuevoLote
 	/// </summary>
@@ -22,6 +21,15 @@ namespace ControldeCalidadView{
 			//
 			//TODO: Add the constructor code here
 			//
+		}
+		NuevoLote(GestorLote^ objGestorLote){
+			InitializeComponent();
+			this->objGestorLote = objGestorLote;
+			if (objGestorLote->ListaLote->Count == 0){
+				this->codigo_prev = 0;
+			} else{
+				this->codigo_prev = objGestorLote->ListaLote[objGestorLote->ListaLote->Count - 1]->codigo;
+			}
 		}
 
 	protected:
@@ -35,7 +43,9 @@ namespace ControldeCalidadView{
 		}
 
 	private:
-	public: Lote^ nLote;
+	private: GestorLote^ objGestorLote;
+	private: int codigo_prev;
+	private: List<Fruta^>^ ListaFruta;
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
 	public:
 	private: System::Windows::Forms::Button^  button1;
@@ -63,6 +73,7 @@ namespace ControldeCalidadView{
 			 /// the contents of this method with the code editor.
 			 /// </summary>
 			 void InitializeComponent(void){
+				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(NuevoLote::typeid));
 				 this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 				 this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 				 this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -198,7 +209,6 @@ namespace ControldeCalidadView{
 				 this->textBox3->Name = L"textBox3";
 				 this->textBox3->Size = System::Drawing::Size(121, 20);
 				 this->textBox3->TabIndex = 3;
-				 this->textBox3->TextChanged += gcnew System::EventHandler(this, &NuevoLote::textBox3_TextChanged);
 				 this->textBox3->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &NuevoLote::textBox3_KeyPress);
 				 // 
 				 // comboBox1
@@ -252,6 +262,7 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->button2);
 				 this->Controls->Add(this->groupBox1);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				 this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 				 this->Name = L"NuevoLote";
 				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -267,44 +278,43 @@ namespace ControldeCalidadView{
 
 	private: void MostrarGrilla(){
 		this->dataGridView1->Rows->Clear();
-		for (int i = 0; i < this->nLote->ListaFruta->Count; i++){
+		for (int i = 0; i < this->ListaFruta->Count; i++){
 			array<String^>^ fila = gcnew array<String^>(4);
-			fila[0] = Convert::ToString(this->nLote->ListaFruta[i]->codigo);
-			fila[1] = this->nLote->ListaFruta[i]->nombre;
+			fila[0] = Convert::ToString(this->ListaFruta[i]->codigo);
+			fila[1] = this->ListaFruta[i]->nombre;
 			this->dataGridView1->Rows->Add(fila);
 		}
 	}
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e){
-		if (!(this->textBox1->Text == "" || this->textBox3->Text == "" || this->nLote->ListaFruta->Count == 0)){
-			this->nLote->codigo = Convert::ToInt32(this->textBox1->Text);
-			this->nLote->NroLote = Convert::ToInt32(this->textBox3->Text);
-			this->nLote->EstadoLote = this->comboBox1->Text;
-			this->nLote->FechaProduccion = this->dateTimePicker1->Text;
+		if (!(this->textBox1->Text == "" || this->textBox3->Text == "" || this->ListaFruta->Count == 0 ||
+			  this->comboBox1->SelectedIndex == -1)){
+			Lote^ nLote = gcnew Lote();
+			nLote->codigo = Convert::ToInt32(this->textBox1->Text);
+			nLote->NroLote = Convert::ToInt32(this->textBox3->Text);
+			nLote->EstadoLote = this->comboBox1->Text;
+			nLote->FechaProduccion = this->dateTimePicker1->Text;
+			nLote->ListaFruta = this->ListaFruta;
+			this->objGestorLote->AgregarLote(nLote);
 			this->Close();
-			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 		} else{
-			MessageBox::Show("Completar todos los campos");
+			MessageBox::Show("Completar todos los campos", "Aviso");
 		}
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		frmAgregarFruta^ VentanaNuevaFruta = gcnew frmAgregarFruta();
-		if (VentanaNuevaFruta->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-			for (int i = 0; i < VentanaNuevaFruta->nfruta->Count; i++){
-				this->nLote->ListaFruta->Add(VentanaNuevaFruta->nfruta[i]);
-			}
-			
-			MostrarGrilla();
-		}
+		frmAgregarFruta^ VentanaNuevaFruta = gcnew frmAgregarFruta(this->ListaFruta);
+		VentanaNuevaFruta->ShowDialog();
+		MostrarGrilla();
 	}
 	private: System::Void NuevoLote_Load(System::Object^  sender, System::EventArgs^  e){
-		this->nLote = gcnew Lote();
+		this->textBox1->Text = Convert::ToString(this->codigo_prev + 1);
+		this->comboBox1->SelectedIndex = 0;
+		this->ListaFruta = gcnew List<Fruta^>();
+		this->ListaFruta->Clear();
 	}
 	private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
 		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
 			e->Handled = true;
 		}
-	}
-	private: System::Void textBox3_TextChanged(System::Object^  sender, System::EventArgs^  e){
 	}
 	private: System::Void textBox3_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
 		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){

@@ -66,6 +66,7 @@ namespace ControldeCalidadView{
 		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void InitializeComponent(void){
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(frmManteFruta::typeid));
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -132,6 +133,7 @@ namespace ControldeCalidadView{
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->Size = System::Drawing::Size(544, 194);
 			this->dataGridView1->TabIndex = 2;
+			this->dataGridView1->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmManteFruta::dataGridView1_CellDoubleClick);
 			// 
 			// Column1
 			// 
@@ -199,6 +201,7 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"frmManteFruta";
 			this->ShowInTaskbar = false;
 			this->Text = L"Mantenimiento Fruta";
@@ -250,16 +253,12 @@ namespace ControldeCalidadView{
 		MostrarGrilla();
 	}
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e){
-		int fila = this->dataGridView1->SelectedRows[0]->Index;
-		int idModificar = Convert::ToInt32(this->dataGridView1->Rows[fila]->Cells[0]->Value->ToString());
-		frmModificarFruta^ ventanaModificarFruta = gcnew frmModificarFruta(this->objGestorFruta, idModificar);
+		frmModificarFruta^ ventanaModificarFruta = gcnew frmModificarFruta(this->objGestorFruta, Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedCells[0]->RowIndex]->Cells[0]->Value));
 		ventanaModificarFruta->ShowDialog();
 		MostrarGrilla();
 	}
 	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e){
-		int fila = this->dataGridView1->SelectedRows[0]->Index;
-		int idEliminar = Convert::ToInt32(this->dataGridView1->Rows[fila]->Cells[0]->Value->ToString());
-		this->objGestorFruta->EliminarFrutaxCodigo(idEliminar);
+		this->objGestorFruta->EliminarFrutaxCodigo(Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedCells[0]->RowIndex]->Cells[0]->Value));
 		MostrarGrilla();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
@@ -273,6 +272,9 @@ namespace ControldeCalidadView{
 	}
 	private: System::Void frmManteFruta_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 		this->objGestorFruta->Serializar();
+	}
+	private: System::Void dataGridView1_CellDoubleClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
+		this->dataGridView1->Rows[e->RowIndex]->Selected = true;
 	}
 	};
 }

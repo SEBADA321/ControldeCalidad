@@ -119,7 +119,6 @@ namespace ControldeCalidadView{
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(449, 150);
 			this->dataGridView1->TabIndex = 4;
-			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellClick);
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellContentClick);
 			this->dataGridView1->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MantenimientoUsuarios::dataGridView1_CellDoubleClick);
 			// 
@@ -211,7 +210,7 @@ namespace ControldeCalidadView{
 		//this->dataGridView1->Rows[0]->Selected = e->ColumnIndex;
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		NuevoUsuario^ VentanaNuevoUsuario = gcnew NuevoUsuario();
+		NuevoUsuario^ VentanaNuevoUsuario = gcnew NuevoUsuario(this->objGestorUsuarios->ListaUsuarios->Count);
 		if (VentanaNuevoUsuario->ShowDialog() == System::Windows::Forms::DialogResult::OK){
 			this->objGestorUsuarios->AgregarUsuario(VentanaNuevoUsuario->newUser);
 			MostrarGrilla();
@@ -263,8 +262,6 @@ namespace ControldeCalidadView{
 		//this->objGestorUsuarios->EliminarUsuarioxCodigo(Convert::ToInt32(this->dataGridView1->SelectedRows[0]->Cells[0]->Value));
 		this->objGestorUsuarios->EliminarUsuarioxCodigo(Convert::ToInt32(this->dataGridView1->Rows[this->dataGridView1->SelectedCells[0]->RowIndex]->Cells[0]->Value));
 		MostrarGrilla();
-	}
-	private: System::Void dataGridView1_CellClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
 	}
 	private: System::Void dataGridView1_CellDoubleClick(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e){
 		this->dataGridView1->Rows[e->RowIndex]->Selected = true;

@@ -24,6 +24,11 @@ namespace ControldeCalidadView{
 			//
 		}
 
+		NuevoUsuario(int codigo_prev){
+			InitializeComponent();
+			this->codigo_prev = codigo_prev;
+		}
+
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -33,7 +38,8 @@ namespace ControldeCalidadView{
 				delete components;
 			}
 		}
-	public:Usuario^ newUser;
+	public: Usuario^ newUser;
+	private: int codigo_prev;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
@@ -60,6 +66,7 @@ namespace ControldeCalidadView{
 		/// the contents of this method with the code editor.
 		/// </summary>
 		void InitializeComponent(void){
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(NuevoUsuario::typeid));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -202,6 +209,7 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"NuevoUsuario";
 			this->ShowInTaskbar = false;
 			this->Text = L"Nuevo Usuario";
@@ -213,6 +221,7 @@ namespace ControldeCalidadView{
 #pragma endregion
 	private: System::Void NuevoUsuario_Load(System::Object^  sender, System::EventArgs^  e){
 		this->newUser = gcnew Usuario();
+		this->bt_codigo->Text = Convert::ToString(this->codigo_prev + 1);
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		if (!(this->bt_apellidos->Text == "" || this->bt_nombres->Text == "" || this->bt_codigo->Text == "" ||
@@ -226,7 +235,7 @@ namespace ControldeCalidadView{
 				this->Close();
 				this->DialogResult = System::Windows::Forms::DialogResult::OK;
 			} else{
-				MessageBox::Show("Las contraseñas deben ser iguales");
+				MessageBox::Show("Las contraseñas deben ser iguales","Aviso");
 			}
 		} else{
 			MessageBox::Show("Debe completar todos los campos");

@@ -42,6 +42,11 @@ namespace ControldeCalidadView{
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::NotifyIcon^  notifyIcon1;
+	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^  cerrarToolStripMenuItem;
+	private: System::Windows::Forms::PictureBox^  pictureBox1;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -57,12 +62,20 @@ namespace ControldeCalidadView{
 		/// the contents of this method with the code editor.
 		/// </summary>
 		void InitializeComponent(void){
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Login::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->notifyIcon1 = (gcnew System::Windows::Forms::NotifyIcon(this->components));
+			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->cerrarToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->contextMenuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -108,11 +121,52 @@ namespace ControldeCalidadView{
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Login::button1_Click);
 			// 
+			// notifyIcon1
+			// 
+			this->notifyIcon1->BalloonTipText = L"Sistema";
+			this->notifyIcon1->BalloonTipTitle = L"Sis";
+			this->notifyIcon1->ContextMenuStrip = this->contextMenuStrip1;
+			this->notifyIcon1->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"notifyIcon1.Icon")));
+			this->notifyIcon1->Text = L"Sistema Control";
+			this->notifyIcon1->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Login::notifyIcon1_MouseDoubleClick);
+			// 
+			// contextMenuStrip1
+			// 
+			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2){
+				this->toolStripMenuItem1,
+					this->cerrarToolStripMenuItem
+			});
+			this->contextMenuStrip1->Name = L"contextMenuStrip1";
+			this->contextMenuStrip1->Size = System::Drawing::Size(107, 48);
+			// 
+			// toolStripMenuItem1
+			// 
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			this->toolStripMenuItem1->Size = System::Drawing::Size(106, 22);
+			this->toolStripMenuItem1->Text = L"Abrir";
+			this->toolStripMenuItem1->Click += gcnew System::EventHandler(this, &Login::toolStripMenuItem1_Click);
+			// 
+			// cerrarToolStripMenuItem
+			// 
+			this->cerrarToolStripMenuItem->Name = L"cerrarToolStripMenuItem";
+			this->cerrarToolStripMenuItem->Size = System::Drawing::Size(106, 22);
+			this->cerrarToolStripMenuItem->Text = L"Cerrar";
+			this->cerrarToolStripMenuItem->Click += gcnew System::EventHandler(this, &Login::cerrarToolStripMenuItem_Click);
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Location = System::Drawing::Point(12, 12);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(251, 312);
+			this->pictureBox1->TabIndex = 5;
+			this->pictureBox1->TabStop = false;
+			// 
 			// Login
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(527, 336);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
@@ -124,8 +178,11 @@ namespace ControldeCalidadView{
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Sistema control de calidad PUCP";
 			this->Load += gcnew System::EventHandler(this, &Login::Login_Load);
+			this->contextMenuStrip1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
+
 		}
 #pragma endregion
 	private: System::Void Login_Load(System::Object^  sender, System::EventArgs^  e){
@@ -145,19 +202,49 @@ namespace ControldeCalidadView{
 		if (correcto){
 			this->ventanaPrincipal = gcnew frmPrincipal(this->objGestorUsuario->ListaUsuarios[j]);
 			this->Hide();
-			if (this->ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::No){
+			this->ventanaPrincipal->ShowDialog();
+			if (this->ventanaPrincipal->minmax){
+				this->notifyIcon1->Visible = true;
+			} else{
 				this->Close();
 			}
 		} else if (this->textBox1->Text == "admin" && this->textBox2->Text == "admin"){
 			this->ventanaPrincipal = gcnew frmPrincipal();
 			this->ventanaPrincipal->admin = true;
 			this->Hide();
-			if (this->ventanaPrincipal->ShowDialog() == System::Windows::Forms::DialogResult::No){
+			this->ventanaPrincipal->ShowDialog();
+			if (this->ventanaPrincipal->minmax){
+				this->notifyIcon1->Visible = true;
+			} else{
 				this->Close();
 			}
 		} else{
-			MessageBox::Show("El usuario y/o contraseña no es correcto");
+			MessageBox::Show("El usuario y/o contraseña no es correcto", "Aviso");
 		}
+	}
+	private: System::Void notifyIcon1_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e){
+		if (e->Button == System::Windows::Forms::MouseButtons::Left){
+			this->notifyIcon1->Visible = false;
+			this->ventanaPrincipal->ShowDialog();
+			if (this->ventanaPrincipal->minmax){
+				this->notifyIcon1->Visible = true;
+			} else{
+				this->Close();
+			}
+		}
+	}
+	private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e){
+		this->notifyIcon1->Visible = false;
+		this->ventanaPrincipal->ShowDialog();
+		if (this->ventanaPrincipal->minmax){
+			this->notifyIcon1->Visible = true;
+		} else{
+			this->Close();
+		}
+	}
+	private: System::Void cerrarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		this->notifyIcon1->Visible = false;
+		this->Close();
 	}
 	};
 }

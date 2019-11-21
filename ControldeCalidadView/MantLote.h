@@ -66,6 +66,7 @@ namespace ControldeCalidadView{
 			 /// the contents of this method with the code editor.
 			 /// </summary>
 			 void InitializeComponent(void){
+				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MantLote::typeid));
 				 this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 				 this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 				 this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -152,10 +153,11 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->button1);
 				 this->Controls->Add(this->dataGridView1);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				 this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 				 this->Name = L"MantLote";
 				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-				 this->Text = L"MantLote";
+				 this->Text = L"Mantenimiento Lote";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MantLote::MantLote_FormClosed);
 				 this->Load += gcnew System::EventHandler(this, &MantLote::MantLote_Load);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -181,11 +183,9 @@ namespace ControldeCalidadView{
 		}
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
-		NuevoLote^ VentanaNuevoLote = gcnew NuevoLote();
-		if (VentanaNuevoLote->ShowDialog() == System::Windows::Forms::DialogResult::OK){
-			this->objGestorLote->ListaLote->Add(VentanaNuevoLote->nLote);
-			MostrarGrilla();
-		}
+		NuevoLote^ VentanaNuevoLote = gcnew NuevoLote(this->objGestorLote);
+		VentanaNuevoLote->ShowDialog();
+		MostrarGrilla();
 	}
 	private: System::Void MantLote_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 		this->objGestorLote->Serializar();

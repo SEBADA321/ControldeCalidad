@@ -311,7 +311,7 @@ namespace ControldeCalidadView{
 
 		}
 #pragma endregion
-		/*	
+		/*
 		Se separa en partes utiles para asignar a los atributos del lote y sus frutas.
 		Tambien se usará para monitorear los sensores
 		*/
@@ -323,9 +323,9 @@ namespace ControldeCalidadView{
 		this->fruta_estado = "";
 		this->fruta_color = "";
 	}
-		/*
-		Función publica usada desde frmPrincipal para obtener datos del puerto serial
-		*/
+			 /*
+			 Función publica usada desde frmPrincipal para obtener datos del puerto serial
+			 */
 	public: int Obtener_Serial(String^ serial_rec){
 		this->DecodificarSerial(serial_rec);
 		this->ActualizarBarra();

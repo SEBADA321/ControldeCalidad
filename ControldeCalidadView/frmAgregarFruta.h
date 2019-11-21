@@ -24,6 +24,16 @@ namespace ControldeCalidadView{
 			//
 		}
 
+		frmAgregarFruta(List<Fruta^>^ ListaFruta){
+			InitializeComponent();
+			this->ListaFruta = ListaFruta;
+			if (ListaFruta->Count==0){
+				this->codigo_prev = 0;
+			} else{
+				this->codigo_prev = ListaFruta[ListaFruta->Count - 1]->codigo;
+			}
+		}
+
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -35,8 +45,9 @@ namespace ControldeCalidadView{
 		}
 
 	private:
-	public: List<Fruta^>^ nfruta;
+	private: List<Fruta^>^ ListaFruta;
 	private: GestorFruta^objGestorFruta;
+	private: int codigo_prev;
 	private: System::Windows::Forms::Button^  button1;
 	public:
 	private: System::Windows::Forms::Label^  label1;
@@ -63,6 +74,7 @@ namespace ControldeCalidadView{
 			 /// the contents of this method with the code editor.
 			 /// </summary>
 			 void InitializeComponent(void){
+				 System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(frmAgregarFruta::typeid));
 				 this->button1 = (gcnew System::Windows::Forms::Button());
 				 this->label1 = (gcnew System::Windows::Forms::Label());
 				 this->label2 = (gcnew System::Windows::Forms::Label());
@@ -167,6 +179,7 @@ namespace ControldeCalidadView{
 				 // 
 				 // comboBox1
 				 // 
+				 this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 				 this->comboBox1->FormattingEnabled = true;
 				 this->comboBox1->Location = System::Drawing::Point(130, 41);
 				 this->comboBox1->Name = L"comboBox1";
@@ -210,12 +223,12 @@ namespace ControldeCalidadView{
 				 this->Controls->Add(this->label2);
 				 this->Controls->Add(this->label1);
 				 this->Controls->Add(this->button1);
-				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+				 this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 				 this->Name = L"frmAgregarFruta";
 				 this->ShowInTaskbar = false;
 				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"Agregar Fruta";
-				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &frmAgregarFruta::frmAgregarFruta_FormClosed);
 				 this->Load += gcnew System::EventHandler(this, &frmAgregarFruta::frmAgregarFruta_Load);
 				 this->ResumeLayout(false);
 				 this->PerformLayout();
@@ -223,10 +236,9 @@ namespace ControldeCalidadView{
 			 }
 #pragma endregion
 	private: System::Void frmAgregarFruta_Load(System::Object^  sender, System::EventArgs^  e){
-		this->nfruta = gcnew List<Fruta^>();
-		this->nfruta->Clear();
 		this->objGestorFruta = gcnew GestorFruta();
 		this->objGestorFruta->Deserializar();
+		this->textBox1->Text = Convert::ToString(this->codigo_prev+1);
 		for (int i = 0; i < this->objGestorFruta->ListaFruta->Count; i++){
 			this->comboBox1->Items->Add(this->objGestorFruta->ListaFruta[i]->nombre);
 		}
@@ -239,16 +251,13 @@ namespace ControldeCalidadView{
 				fruta->codigo = codInc;
 				fruta->nombre = this->comboBox1->Text;
 				fruta->color = "";
-				this->nfruta->Add(fruta);
+				this->ListaFruta->Add(fruta);
 				codInc++;
 			}
 			this->Close();
-			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 		} else{
 			MessageBox::Show("Completar todos los campos");
 		}
-	}
-	private: System::Void frmAgregarFruta_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e){
 	}
 	private: System::Void textBox1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e){
 		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){

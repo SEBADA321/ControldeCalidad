@@ -46,6 +46,7 @@ namespace ControldeCalidadView{
 			}
 		}
 	public: bool admin;
+	public: bool minmax;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: GestorLote^ objGestorLote;
 	private: Usuario^ usuario;
@@ -238,8 +239,9 @@ namespace ControldeCalidadView{
 			});
 			this->statusStrip1->Location = System::Drawing::Point(0, 518);
 			this->statusStrip1->Name = L"statusStrip1";
-			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
+			this->statusStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::ManagerRenderMode;
 			this->statusStrip1->Size = System::Drawing::Size(819, 22);
+			this->statusStrip1->SizingGrip = false;
 			this->statusStrip1->Stretch = false;
 			this->statusStrip1->TabIndex = 4;
 			this->statusStrip1->Text = L"statusStrip1";
@@ -248,6 +250,8 @@ namespace ControldeCalidadView{
 			// 
 			this->toolStripProgressBar1->Name = L"toolStripProgressBar1";
 			this->toolStripProgressBar1->Size = System::Drawing::Size(100, 16);
+			this->toolStripProgressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
+			this->toolStripProgressBar1->ToolTipText = L"Progreso";
 			// 
 			// toolStripStatusLabel1
 			// 
@@ -259,6 +263,7 @@ namespace ControldeCalidadView{
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(819, 540);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->lb_test);
@@ -281,11 +286,6 @@ namespace ControldeCalidadView{
 
 		}
 #pragma endregion
-	private: System::Void frutaToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
-		frmManteFruta^ventanaMantFruta = gcnew frmManteFruta();
-		ventanaMantFruta->MdiParent = this;
-		ventanaMantFruta->Show();
-	}
 	private: System::Void VentanaP_Load(System::Object^  sender, System::EventArgs^  e){
 		if (this->admin == true){
 			this->usuarioToolStripMenuItem->Enabled = true;
@@ -295,22 +295,27 @@ namespace ControldeCalidadView{
 		this->toolStripProgressBar1->Visible = false;
 		this->toolStripStatusLabel1->Visible = false;
 		this->toolStripStatusLabel1->Text = "";
+		this->minmax = true;
 	}
 
+	private: System::Void frutaToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
+		frmManteFruta^ventanaMantFruta = gcnew frmManteFruta();
+		ventanaMantFruta->MdiParent = this;
+		ventanaMantFruta->Show();
+	}
 			 //cierra el puerto
 	private: System::Void cerrarPuertoToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		this->serialPort->Close();
 		this->cerrarPuertoToolStripMenuItem->Enabled = false;
 		this->timer1->Stop();
 	}
-
 			 //recive datos del puerto seleccionado cada cierto tiempo
 	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e){
 		if (this->serialPort->BytesToRead > 0){
 			try{
 				this->toolStripProgressBar1->Value = this->frmVerProceso->Obtener_Serial(this->serialPort->ReadLine());
 				this->toolStripStatusLabel1->Text = (Convert::ToDouble(this->toolStripProgressBar1->Value) * 100 / Convert::ToDouble(this->toolStripProgressBar1->Maximum)).ToString("F1") + "%";
-				
+
 				if (this->timer1->Enabled){
 					this->lb_test->Text = "Funcionando";
 				} else{
@@ -320,10 +325,12 @@ namespace ControldeCalidadView{
 			}
 		}
 	}
+
 	private: System::Void configurarPuertoToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		VentanaSerial^ ventanaserial = gcnew VentanaSerial(this->serialPort, this->cerrarPuertoToolStripMenuItem, this->timer1);
 		ventanaserial->ShowDialog();
 	}
+
 	private: System::Void iniciarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		if (this->serialPort->IsOpen){
 			frmIniciarProceso^ VentanaIniciar = gcnew frmIniciarProceso(this->usuario);
@@ -362,11 +369,13 @@ namespace ControldeCalidadView{
 	private: System::Void cerrarToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e){
 		System::Windows::Forms::DialogResult r = MessageBox::Show("Confirmar cerrar", "Aviso", System::Windows::Forms::MessageBoxButtons::YesNo);
 		if (r == System::Windows::Forms::DialogResult::Yes){
+			this->minmax = false;
 			this->Close();
 		}
 	}
 	private: System::Void frmPrincipal_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e){
-		this->DialogResult = System::Windows::Forms::DialogResult::No;
+		e->Cancel = true;
+		this->Hide();
 	}
 	};
 }

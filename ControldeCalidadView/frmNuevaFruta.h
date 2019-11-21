@@ -24,6 +24,11 @@ namespace ControldeCalidadView{
 		frmNuevaFruta(GestorFruta^ objGestorFruta){
 			InitializeComponent();
 			this->objGestorFruta = objGestorFruta;
+			if (objGestorFruta->ListaFruta->Count == 0){
+				this->codigo_nuevo = 0;
+			} else{
+				this->codigo_nuevo = objGestorFruta->ListaFruta[objGestorFruta->ListaFruta->Count - 1]->codigo;
+			}
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -40,6 +45,7 @@ namespace ControldeCalidadView{
 		}
 	protected:
 	private: GestorFruta^ objGestorFruta;
+	private: int codigo_nuevo;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
@@ -66,6 +72,7 @@ namespace ControldeCalidadView{
 		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void InitializeComponent(void){
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(frmNuevaFruta::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -177,6 +184,7 @@ namespace ControldeCalidadView{
 			// 
 			// comboBox1
 			// 
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2){ L"Apto", L"Dañado" });
 			this->comboBox1->Location = System::Drawing::Point(140, 143);
@@ -202,10 +210,12 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"frmNuevaFruta";
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Nueva Fruta";
+			this->Load += gcnew System::EventHandler(this, &frmNuevaFruta::frmNuevaFruta_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -214,16 +224,13 @@ namespace ControldeCalidadView{
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e){
 		if (this->textBox1->Text == "" || this->textBox2->Text == "" || this->textBox3->Text == "" ||
 			this->textBox4->Text == "" || this->comboBox1->SelectedIndex == -1){
-			MessageBox::Show("Todos los campos deben estar completados");
+			MessageBox::Show("Todos los campos deben estar completados", "Aviso");
 		} else{
-			int codigo = Convert::ToInt32(this->textBox1->Text);
-			String^ nombre = this->textBox2->Text;
-			int tamaño = Convert::ToInt32(this->textBox3->Text);
-			String^ color = this->textBox4->Text;
-			String^ estado = this->comboBox1->Text;
-			Fruta^ objFruta = gcnew Fruta(codigo, nombre, tamaño, color, estado);
+			Fruta^ objFruta = gcnew Fruta(Convert::ToInt32(this->textBox1->Text), this->textBox2->Text,
+										  Convert::ToInt32(this->textBox3->Text), this->textBox4->Text,
+										  this->comboBox1->Text);
 			this->objGestorFruta->AgregarFruta(objFruta);
-			MessageBox::Show("El tema ha sido registrado con éxito");
+			MessageBox::Show("El tema ha sido registrado con éxito", "Aviso");
 			this->Close();
 		}
 	}
@@ -239,6 +246,9 @@ namespace ControldeCalidadView{
 		if ((!Char::IsDigit(e->KeyChar) && (e->KeyChar != 0x08)) && (e->KeyChar != 0x0D)){
 			e->Handled = true;
 		}
+	}
+	private: System::Void frmNuevaFruta_Load(System::Object^  sender, System::EventArgs^  e){
+		this->textBox1->Text = Convert::ToString(this->codigo_nuevo + 1);
 	}
 	};
 }

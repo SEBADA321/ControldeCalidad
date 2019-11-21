@@ -69,6 +69,7 @@ namespace ControldeCalidadView{
 		/// </summary>
 		void InitializeComponent(void){
 			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(VentanaSerial::typeid));
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->bt_act = (gcnew System::Windows::Forms::Button());
 			this->cb_baudrate = (gcnew System::Windows::Forms::ComboBox());
@@ -202,10 +203,11 @@ namespace ControldeCalidadView{
 			this->Controls->Add(this->bt_guardar);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"VentanaSerial";
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"VentanaSerial";
+			this->Text = L"Ventana Serial";
 			this->Load += gcnew System::EventHandler(this, &VentanaSerial::VentanaSerial_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
